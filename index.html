@@ -3,971 +3,573 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Alex A — Video Editor Portfolio</title>
-  <meta name="description" content="Short-form video editor. Hooks, captions, pacing. TikTok/Reels/Shorts, YouTube, stream highlights." />
+  <title>Alex A — Video Editor (Shorts / Reels / TikTok)</title>
+  <meta name="description" content="Short-form video editor for TikTok/Reels/Shorts + YouTube + stream highlights. Hooks, captions, retention. Fast workflow." />
   <meta property="og:title" content="Alex A — Video Editor (Shorts / Reels / TikTok)" />
-  <meta property="og:description" content="Short-form video editor. Hooks, captions, pacing. TikTok/Reels/Shorts, YouTube, stream highlights." />
+  <meta property="og:description" content="Short-form editing. Hooks, captions, retention. TikTok/Reels/Shorts, YouTube, stream clips." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0b0d10" />
-
-  <style>
-    :root{
-      --bg:#0b0d10;
-      --bg2:#0f1217;
-      --card:rgba(255,255,255,.03);
-      --card2:rgba(255,255,255,.05);
-      --line:rgba(255,255,255,.10);
-      --line2:rgba(255,255,255,.16);
-      --text:#e9ecef;
-      --muted:rgba(233,236,239,.70);
-      --muted2:rgba(233,236,239,.56);
-      --shadow: 0 18px 55px rgba(0,0,0,.45);
-      --radius:24px;
-      --radius2:18px;
-      --max:1160px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background:
-        radial-gradient(1200px 800px at 15% -10%, rgba(233,236,239,.06), transparent 55%),
-        radial-gradient(900px 600px at 85% 10%, rgba(233,236,239,.05), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      color:var(--text);
-      letter-spacing:.1px;
-    }
-    a{color:inherit; text-decoration:none}
-    .container{max-width:var(--max); margin:0 auto; padding:0 18px}
-    .mono{font-variant-numeric: tabular-nums; font-feature-settings:"tnum" 1}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px; border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      font-weight:900; font-size:12px;
-    }
-    .dot{width:8px;height:8px;border-radius:50%; background:rgba(233,236,239,.95); box-shadow:0 0 0 6px rgba(233,236,239,.10)}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:12px 14px; border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--text);
-      font-weight:900; font-size:13px;
-      cursor:pointer;
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-    }
-    .btn:hover{background:rgba(255,255,255,.05); border-color:var(--line2)}
-    .btn:active{transform:translateY(1px)}
-    .btn.primary{background:rgba(233,236,239,.12); border-color:rgba(233,236,239,.22)}
-    .btn.small{padding:9px 11px; font-size:12px}
-    .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:11px; padding:3px 6px; border-radius:8px; border:1px solid var(--line); color:var(--muted);}
-    .sep{height:1px; background:var(--line); width:100%}
-
-    /* Awwwards-like topbar */
-    .topbar{
-      position:sticky; top:0; z-index:60;
-      background:rgba(11,13,16,.65);
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid rgba(255,255,255,.08);
-      transition: transform .18s ease;
-    }
-    body.scroll-down .topbar{transform: translateY(-110%)}
-    body.scroll-up .topbar{transform: translateY(0)}
-    body.nav-open .topbar{transform: translateY(0)}
-
-    .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 0}
-    .brand{display:flex; align-items:center; gap:10px; min-width:200px}
-    .brand-title{font-weight:1000; letter-spacing:.2px}
-    .brand-sub{color:var(--muted2); font-size:12px; margin-top:2px}
-    .nav{display:flex; gap:12px; align-items:center}
-    .nav a{color:var(--muted); font-weight:800; font-size:12px; letter-spacing:.2px}
-    .nav a:hover{color:var(--text)}
-    .actions{display:flex; align-items:center; gap:10px}
-    .lang{display:flex; gap:6px; align-items:center}
-    .lang button{border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--muted); font-weight:900; padding:9px 10px; border-radius:999px; cursor:pointer}
-    .lang button.active{color:var(--text); border-color:rgba(233,236,239,.24); background:rgba(233,236,239,.10)}
-    #menuBtn{display:none}
-
-    /* Mobile drawer */
-    .drawer{display:none}
-    body.nav-open{overflow:hidden}
-    body.nav-open .drawer{
-      display:flex; position:fixed; inset:0; z-index:90;
-      background:rgba(0,0,0,.58); backdrop-filter: blur(6px);
-      align-items:flex-end; justify-content:center; padding:14px;
-    }
-    .drawer-inner{
-      width:100%; max-width:560px;
-      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.16);
-      border-radius:26px; padding:16px;
-      box-shadow: var(--shadow);
-    }
-    .drawer-top{display:flex; align-items:center; justify-content:space-between; gap:12px}
-    .drawer-title{font-weight:1000}
-    .drawer-links{display:flex; flex-direction:column; gap:8px; margin:12px 0}
-    .drawer-link{padding:12px 12px; border-radius:16px; border:1px solid var(--line); background:rgba(255,255,255,.03); font-weight:900}
-    .drawer-cta{display:flex; gap:10px; flex-wrap:wrap}
-
-    /* Sections */
-    section{padding:72px 0; border-top:1px solid rgba(255,255,255,.08)}
-    section.hero{border-top:0; padding:64px 0 56px}
-    .section-title{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:18px}
-    .section-title h2{margin:0; font-size:20px; letter-spacing:.2px}
-    .hint{color:var(--muted); font-size:13px; max-width:62ch; text-align:right}
-
-    /* Hero layout inspired by Awwwards "Site of the Day" card + feed */
-    .hero-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:16px; align-items:start}
-    .hero-card{
-      border:1px solid rgba(255,255,255,.14);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
-      border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .hero-card-inner{padding:20px}
-    h1{margin:0; font-size:44px; line-height:1.05; letter-spacing:-.6px}
-    .lead{color:var(--muted); margin:12px 0 0; font-size:15px; max-width:70ch}
-    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
-    .hero-meta{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-top:16px}
-    .meta-box{border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:16px; padding:12px}
-    .meta-k{color:var(--muted2); font-size:12px}
-    .meta-v{font-weight:1000; margin-top:2px; font-size:13px}
-
-    .score-panel{
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.03);
-      border-radius:var(--radius);
-      padding:18px;
-    }
-    .score-top{display:flex; align-items:center; justify-content:space-between; gap:10px}
-    .score-title{font-weight:1000}
-    .score-big{font-size:34px; font-weight:1000; letter-spacing:-.6px}
-    .score-sub{color:var(--muted); font-size:12px; margin-top:4px}
-    .score-bars{margin-top:14px; display:grid; gap:10px}
-    .bar{display:grid; grid-template-columns: 86px 1fr 44px; gap:10px; align-items:center}
-    .bar label{color:var(--muted); font-size:12px; font-weight:800}
-    .track{height:8px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); overflow:hidden}
-    .fill{height:100%; width:0%; background:rgba(233,236,239,.65)}
-    .bar .val{font-weight:900; font-size:12px; color:var(--muted)}
-    .mini{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
-    .tag{display:inline-flex; align-items:center; padding:7px 10px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.03); font-weight:900; font-size:12px; color:var(--muted)}
-    .tag strong{color:var(--text); margin-right:6px}
-
-    /* Video blocks */
-    .video-wrap{border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.02); border-radius:var(--radius); overflow:hidden}
-    .video-wrap video{width:100%; height:100%; display:block; background:rgba(0,0,0,.25)}
-    .video-head{padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:10px; border-bottom:1px solid rgba(255,255,255,.08)}
-    .video-head b{font-weight:1000}
-    .video-head span{color:var(--muted); font-size:12px}
-
-    /* Feed grid inspired by Awwwards cards */
-    .grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
-    .card{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:var(--radius2);
-      overflow:hidden;
-      transition: transform .12s ease, border-color .12s ease, background .12s ease;
-    }
-    .card:hover{transform:translateY(-2px); border-color:rgba(255,255,255,.20); background:rgba(255,255,255,.04)}
-    .thumb{position:relative; aspect-ratio:16/9; background:rgba(255,255,255,.02); overflow:hidden}
-    .thumb video{width:100%; height:100%; object-fit:cover; display:block}
-    .playbtn{
-      position:absolute;
-      inset:50% auto auto 50%;
-      transform:translate(-50%,-50%);
-      width:56px; height:56px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.22);
-      background:rgba(0,0,0,.38);
-      color:var(--text);
-      font-size:20px;
-      font-weight:1000;
-      display:flex; align-items:center; justify-content:center;
-      cursor:pointer;
-      backdrop-filter: blur(6px);
-    }
-    .playing .playbtn{display:none}
-    .card-body{padding:12px 12px 14px}
-    .title{font-weight:1000}
-    .sub{color:var(--muted); font-size:12px; margin-top:4px}
-    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
-    .chip{padding:6px 9px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--muted); font-weight:900; font-size:11px}
-
-    /* Services */
-    .cards2{display:grid; grid-template-columns: 1.2fr .8fr; gap:14px}
-    .list{display:grid; gap:12px}
-    .li{display:flex; gap:10px; align-items:flex-start; border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:18px; padding:14px}
-    .li .ic{width:10px;height:10px;border-radius:50%; background:rgba(233,236,239,.95); margin-top:6px; box-shadow:0 0 0 6px rgba(233,236,239,.10)}
-    .li b{font-weight:1000}
-    .li p{margin:6px 0 0; color:var(--muted); font-size:13px}
-
-    /* Before/After */
-    .ba{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
-    .ba-item{border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:18px; padding:16px}
-    .ba-item h3{margin:0; font-size:14px; letter-spacing:.2px}
-    .ba-item p{margin:8px 0 0; color:var(--muted); font-size:13px}
-    .ph{height:130px; border-radius:16px; border:1px dashed rgba(255,255,255,.16); background:rgba(255,255,255,.02); margin-top:12px; display:flex; align-items:center; justify-content:center; color:var(--muted2); font-weight:900; font-size:12px}
-
-    /* Reviews */
-    .reviews{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
-    .review{border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:18px; padding:16px}
-    .review b{font-weight:1000}
-    .review p{margin:10px 0 0; color:var(--muted); font-size:13px}
-    .review .ph{height:110px}
-
-    /* Contact */
-    .contact{display:grid; grid-template-columns:1fr 1fr; gap:14px}
-    .panel{border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.03); border-radius:var(--radius); padding:18px}
-    .panel h3{margin:0; font-size:16px}
-    .panel p{margin:10px 0 0; color:var(--muted); font-size:13px}
-    .panel .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
-
-    footer{padding:26px 0; border-top:1px solid rgba(255,255,255,.08); color:var(--muted); font-size:12px}
-    footer .container{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
-
-    /* Modal (desktop preview) */
-    .vmodal{display:none}
-    body.vmodal-open{overflow:hidden}
-    body.vmodal-open .vmodal{
-      display:flex; position:fixed; inset:0; z-index:120;
-      align-items:center; justify-content:center; padding:16px;
-    }
-    .vmodal-backdrop{position:absolute; inset:0; background:rgba(0,0,0,.65); backdrop-filter: blur(8px)}
-    .vmodal-inner{
-      position:relative; width:min(980px, 100%);
-      border-radius:26px;
-      border:1px solid rgba(255,255,255,.16);
-      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .vmodal-top{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.10)}
-    .vmodal-title{font-weight:1000}
-    .vmodal-video{aspect-ratio:16/9; background:rgba(0,0,0,.25)}
-    .vmodal-video video{width:100%; height:100%; object-fit:contain; display:block}
-
-    /* Floating CTA (mobile) */
-    .float-cta{display:none}
-    @media (max-width: 760px){
-      .float-cta{
-        display:flex;
-        position:fixed;
-        left:14px; right:14px; bottom:14px;
-        z-index:95;
-        gap:10px;
-        padding:10px;
-        border-radius:22px;
-        border:1px solid rgba(255,255,255,.14);
-        background:rgba(11,13,16,.70);
-        backdrop-filter: blur(10px);
-        box-shadow: var(--shadow);
-      }
-      .float-btn{
-        flex:1;
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        padding:12px 12px;
-        border-radius:999px;
-        border:1px solid var(--line);
-        background:rgba(255,255,255,.03);
-        color:var(--text);
-        font-weight:1000;
-        font-size:13px;
-        letter-spacing:.2px;
-      }
-      .float-btn.primary{background:rgba(233,236,239,.14); border-color:rgba(233,236,239,.26)}
-      body{padding-bottom:96px}
-    }
-
-    /* Responsive */
-    @media (max-width: 980px){
-      .hero-grid{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(2, 1fr)}
-      .reviews{grid-template-columns:repeat(2, 1fr)}
-      .cards2{grid-template-columns:1fr}
-      .contact{grid-template-columns:1fr}
-      .nav{display:none}
-      #menuBtn{display:inline-flex}
-      .brand{min-width:unset}
-    }
-    @media (max-width: 760px){
-      section{padding:52px 0}
-      section.hero{padding:46px 0 40px}
-      .topbar-inner{padding:8px 0}
-      .brand-sub{display:none}
-      h1{font-size:34px}
-      .hero-meta{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      .reviews{grid-template-columns:1fr}
-      .ba{grid-template-columns:1fr}
-      .hint{display:none}
-      /* hide header CTA (floating CTA exists) */
-      .actions a.btn{display:none}
-    }
-  </style>
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="container">
-      <div class="topbar-inner">
-        <div class="brand">
-          <span class="dot" aria-hidden="true"></span>
-          <div>
-            <div class="brand-title">Alex A</div>
-            <div class="brand-sub" data-lang="en">Short-form • YouTube • Stream clips</div>
-            <div class="brand-sub" data-lang="ru">Shorts • YouTube • Нарезки стримов</div>
-          </div>
+  <!-- Topbar -->
+  <header class="topbar" id="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="#top">
+        <span class="brand__dot" aria-hidden="true"></span>
+        <span class="brand__text">
+          <span class="brand__name">Alex A</span>
+          <span class="brand__sub" data-i18n="brandSub">Short-form • YouTube • Stream clips</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#featured" data-i18n="navFeatured">Featured</a>
+        <a href="#best" data-i18n="navBest">Best 3</a>
+        <a href="#works" data-i18n="navWorks">Latest</a>
+        <a href="#services" data-i18n="navServices">Services</a>
+        <a href="#before-after" data-i18n="navBA">Before/After</a>
+        <a href="#results" data-i18n="navResults">Results</a>
+        <a href="#reviews" data-i18n="navReviews">Reviews</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
+      </nav>
+
+      <div class="topbar__actions">
+        <div class="lang" aria-label="Language">
+          <button class="lang__btn is-active" id="langEn" type="button">EN</button>
+          <button class="lang__btn" id="langRu" type="button">RU</button>
         </div>
 
-        <nav class="nav" aria-label="Navigation">
-          <a href="#featured" data-lang="en">Featured</a>
-          <a href="#featured" data-lang="ru">Витрина</a>
-          <a href="#works" data-lang="en">Latest</a>
-          <a href="#works" data-lang="ru">Работы</a>
-          <a href="#services" data-lang="en">Services</a>
-          <a href="#services" data-lang="ru">Услуги</a>
-          <a href="#before-after" data-lang="en">Before/After</a>
-          <a href="#before-after" data-lang="ru">До/После</a>
-          <a href="#contact" data-lang="en">Contact</a>
-          <a href="#contact" data-lang="ru">Контакты</a>
-        </nav>
+        <button class="iconbtn" id="menuBtn" type="button" aria-label="Menu">☰</button>
 
-        <div class="actions">
-          <div class="lang" aria-label="Language">
-            <button id="enBtn" class="active" type="button">EN</button>
-            <button id="ruBtn" type="button">RU</button>
-          </div>
-          <button class="btn small" id="menuBtn" type="button" aria-label="Menu">☰</button>
-          <a class="btn small" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Telegram</a>
-          <a class="btn small" href="mailto:alex.altukhov.s@gmail.com">Email</a>
-        </div>
+        <a class="btn btn--ghost btn--sm topbar__cta" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer" data-i18n="ctaTelegram">Telegram</a>
+        <a class="btn btn--ghost btn--sm topbar__cta" href="mailto:alex.altukhov.s@gmail.com" data-i18n="ctaEmail">Email</a>
       </div>
     </div>
   </header>
 
   <!-- Mobile drawer -->
   <div class="drawer" id="drawer" aria-hidden="true">
-    <div class="drawer-inner">
-      <div class="drawer-top">
-        <div class="drawer-title">Menu</div>
-        <button class="btn small" id="menuClose" type="button" aria-label="Close">✕</button>
+    <div class="drawer__card">
+      <div class="drawer__top">
+        <div class="drawer__title">Menu</div>
+        <button class="iconbtn" id="menuClose" type="button" aria-label="Close">✕</button>
       </div>
-      <div class="drawer-links">
-        <a href="#featured" class="drawer-link" data-lang="en">Featured</a>
-        <a href="#featured" class="drawer-link" data-lang="ru">Витрина</a>
-        <a href="#works" class="drawer-link" data-lang="en">Latest</a>
-        <a href="#works" class="drawer-link" data-lang="ru">Работы</a>
-        <a href="#services" class="drawer-link" data-lang="en">Services</a>
-        <a href="#services" class="drawer-link" data-lang="ru">Услуги</a>
-        <a href="#before-after" class="drawer-link" data-lang="en">Before/After</a>
-        <a href="#before-after" class="drawer-link" data-lang="ru">До/После</a>
-        <a href="#reviews" class="drawer-link" data-lang="en">Reviews</a>
-        <a href="#reviews" class="drawer-link" data-lang="ru">Отзывы</a>
-        <a href="#contact" class="drawer-link" data-lang="en">Contact</a>
-        <a href="#contact" class="drawer-link" data-lang="ru">Контакты</a>
+
+      <div class="drawer__links">
+        <a href="#featured" class="drawer__link" data-i18n="navFeatured">Featured</a>
+        <a href="#best" class="drawer__link" data-i18n="navBest">Best 3</a>
+        <a href="#works" class="drawer__link" data-i18n="navWorks">Latest</a>
+        <a href="#services" class="drawer__link" data-i18n="navServices">Services</a>
+        <a href="#before-after" class="drawer__link" data-i18n="navBA">Before/After</a>
+        <a href="#results" class="drawer__link" data-i18n="navResults">Results</a>
+        <a href="#reviews" class="drawer__link" data-i18n="navReviews">Reviews</a>
+        <a href="#contact" class="drawer__link" data-i18n="navContact">Contact</a>
       </div>
-      <div class="drawer-cta">
-        <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Telegram</a>
-        <a class="btn" href="mailto:alex.altukhov.s@gmail.com">Email</a>
+
+      <div class="drawer__cta">
+        <a class="btn btn--primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer" data-i18n="ctaTest">Get a test edit</a>
+        <a class="btn btn--ghost" href="mailto:alex.altukhov.s@gmail.com" data-i18n="ctaEmail">Email</a>
       </div>
     </div>
   </div>
 
-  <main>
-    <section class="hero" id="featured">
+  <main id="top">
+    <!-- HERO / FEATURED -->
+    <section class="section section--hero" id="featured">
       <div class="container">
-        <div class="hero-grid">
-          <div class="hero-card">
-            <div class="hero-card-inner">
-              <div class="pill"><span class="dot" style="width:7px;height:7px;box-shadow:0 0 0 5px rgba(233,236,239,.10)"></span>
-                <span data-lang="en">Editor of the Day</span>
-                <span data-lang="ru">Монтажёр дня</span>
-                <span class="mono" style="color:var(--muted)">—</span>
-                <span class="mono" style="color:var(--muted)"><span id="today"></span></span>
+        <div class="hero">
+          <div class="hero__main">
+            <div class="pill">
+              <span class="pill__dot" aria-hidden="true"></span>
+              <span data-i18n="pillSOTD">Editor of the Day</span>
+              <span class="pill__sep">—</span>
+              <span class="mono" id="today"></span>
+            </div>
+
+            <h1 class="h1">
+              <span data-i18n="heroTitle">Short-form Video Editor<br/>for TikTok / Reels / Shorts</span>
+            </h1>
+
+            <p class="lead" data-i18n="heroLead">
+              Fast pacing, clean captions, strong hooks — built for retention. I also edit YouTube videos and stream highlights. AI-enhanced workflow for speed and quality.
+            </p>
+
+            <div class="hero__actions">
+              <a class="btn btn--primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer" data-i18n="ctaTest">Get a test edit</a>
+              <a class="btn btn--ghost" href="#works" data-i18n="ctaWorks">See works</a>
+              <span class="kbdhint" title="Shortcut">
+                <span class="kbd">⌘</span><span class="kbd">K</span>
+                <span class="kbdhint__text" data-i18n="kbdHint">Quick view</span>
+              </span>
+            </div>
+
+            <div class="hero__facts">
+              <div class="fact">
+                <div class="fact__k" data-i18n="factSpeedK">Speed</div>
+                <div class="fact__v" data-i18n="factSpeedV">1 min final ≈ 20–30 min edit</div>
               </div>
-
-              <h1 style="margin-top:14px">
-                <span data-lang="en">Short-form Video Editor<br/>for TikTok / Reels / Shorts</span>
-                <span data-lang="ru">Монтажёр коротких видео<br/>TikTok / Reels / Shorts</span>
-              </h1>
-
-              <p class="lead">
-                <span data-lang="en">Fast pacing, clean captions, strong hooks — built for retention. I also edit YouTube videos and stream highlights. AI‑enhanced workflow for speed and quality.</span>
-                <span data-lang="ru">Динамика, читаемые субтитры, мощные хуки — для удержания. Также монтирую YouTube и хайлайты со стримов. AI‑инструменты для скорости и качества.</span>
-              </p>
-
-              <div class="hero-actions">
-                <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">
-                  <span data-lang="en">Get a test edit</span>
-                  <span data-lang="ru">Тестовый монтаж</span>
-                </a>
-                <a class="btn" href="#works">
-                  <span data-lang="en">See works</span>
-                  <span data-lang="ru">Посмотреть работы</span>
-                </a>
-                <span class="pill" title="Tip"><span class="kbd">⌘</span><span class="kbd">K</span>
-                  <span data-lang="en">Quick view</span>
-                  <span data-lang="ru">Быстрый просмотр</span>
-                </span>
+              <div class="fact">
+                <div class="fact__k" data-i18n="factCapK">Capacity</div>
+                <div class="fact__v" data-i18n="factCapV">Up to 6 shorts/day</div>
               </div>
-
-              <div class="hero-meta">
-                <div class="meta-box">
-                  <div class="meta-k" data-lang="en">Speed</div><div class="meta-k" data-lang="ru">Скорость</div>
-                  <div class="meta-v" data-lang="en">1 min final ≈ 20–30 min edit</div>
-                  <div class="meta-v" data-lang="ru">1 мин финала ≈ 20–30 мин монтажа</div>
-                </div>
-                <div class="meta-box">
-                  <div class="meta-k" data-lang="en">Capacity</div><div class="meta-k" data-lang="ru">Объём</div>
-                  <div class="meta-v" data-lang="en">Up to 6 shorts/day</div>
-                  <div class="meta-v" data-lang="ru">До 6 shorts/день</div>
-                </div>
-                <div class="meta-box">
-                  <div class="meta-k" data-lang="en">Tools</div><div class="meta-k" data-lang="ru">Инструменты</div>
-                  <div class="meta-v" data-lang="en">CapCut • Premiere • AE • DaVinci</div>
-                  <div class="meta-v" data-lang="ru">CapCut • Premiere • AE • DaVinci</div>
-                </div>
+              <div class="fact">
+                <div class="fact__k" data-i18n="factToolsK">Tools</div>
+                <div class="fact__v">CapCut • Premiere • After Effects • DaVinci</div>
               </div>
             </div>
           </div>
 
-          <aside class="score-panel" aria-label="Score">
-            <div class="score-top">
-              <div>
-                <div class="score-title" data-lang="en">Retention Score</div>
-                <div class="score-title" data-lang="ru">Оценка удержания</div>
-                <div class="score-sub" data-lang="en">A simple rubric clients care about.</div>
-                <div class="score-sub" data-lang="ru">Понятная шкала для клиентов.</div>
+          <aside class="hero__side">
+            <div class="score">
+              <div class="score__top">
+                <div>
+                  <div class="score__title" data-i18n="scoreTitle">Retention Score</div>
+                  <div class="score__sub" data-i18n="scoreSub">A simple rubric clients care about.</div>
+                </div>
+                <div class="score__big mono">9.<span class="muted">1</span></div>
               </div>
-              <div class="score-big mono">9.<span style="opacity:.7">1</span></div>
-            </div>
-            <div class="score-bars">
-              <div class="bar">
-                <label data-lang="en">Hook</label><label data-lang="ru">Хук</label>
-                <div class="track"><div class="fill" style="width:92%"></div></div>
-                <div class="val mono">9.2</div>
+
+              <div class="bars">
+                <div class="bar">
+                  <div class="bar__k" data-i18n="barHook">Hook</div>
+                  <div class="bar__track"><div class="bar__fill" style="width:92%"></div></div>
+                  <div class="bar__v mono">9.2</div>
+                </div>
+                <div class="bar">
+                  <div class="bar__k" data-i18n="barCaps">Captions</div>
+                  <div class="bar__track"><div class="bar__fill" style="width:88%"></div></div>
+                  <div class="bar__v mono">8.8</div>
+                </div>
+                <div class="bar">
+                  <div class="bar__k" data-i18n="barPace">Pacing</div>
+                  <div class="bar__track"><div class="bar__fill" style="width:93%"></div></div>
+                  <div class="bar__v mono">9.3</div>
+                </div>
               </div>
-              <div class="bar">
-                <label data-lang="en">Captions</label><label data-lang="ru">Сабы</label>
-                <div class="track"><div class="fill" style="width:88%"></div></div>
-                <div class="val mono">8.8</div>
+
+              <div class="tags">
+                <span class="tag"><strong data-i18n="tagBestFor">Best for:</strong> Hooks • Captions • Tempo</span>
+                <span class="tag"><strong data-i18n="tagDeliver">Deliver:</strong> Shorts + subtitles + cover</span>
+                <span class="tag"><strong data-i18n="tagTurn">Turnaround:</strong> same day / next day</span>
               </div>
-              <div class="bar">
-                <label data-lang="en">Pacing</label><label data-lang="ru">Темп</label>
-                <div class="track"><div class="fill" style="width:93%"></div></div>
-                <div class="val mono">9.3</div>
+
+              <div class="hr"></div>
+
+              <div class="pricepills">
+                <span class="pill pill--soft">
+                  <span class="mono">2,000 ₽</span>
+                  <span data-i18n="priceShort">/ premium short</span>
+                </span>
+                <span class="pill pill--soft">
+                  <span class="mono">80,000 ₽</span>
+                  <span data-i18n="priceMonth">/ month (full-time)</span>
+                </span>
               </div>
-            </div>
-            <div class="mini">
-              <span class="tag"><strong data-lang="en">Best for:</strong><strong data-lang="ru">Сильное:</strong> Hooks • Captions • Tempo</span>
-              <span class="tag"><strong data-lang="en">Deliver:</strong><strong data-lang="ru">Выдаю:</strong> Shorts + subtitles + cover</span>
-              <span class="tag"><strong data-lang="en">Turnaround:</strong><strong data-lang="ru">Срок:</strong> same day / next day</span>
-            </div>
-            <div class="sep" style="margin:14px 0"></div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap">
-              <span class="pill"><span class="mono">2,000 ₽</span> <span data-lang="en">/ premium short</span><span data-lang="ru">/ premium short</span></span>
-              <span class="pill"><span class="mono">80,000 ₽</span> <span data-lang="en">/ month (full‑time)</span><span data-lang="ru">/ месяц (найм)</span></span>
             </div>
           </aside>
         </div>
       </div>
     </section>
 
-    <section id="showreel">
+    <!-- SHOWREEL -->
+    <section class="section" id="showreel">
       <div class="container">
-        <div class="section-title">
-          <h2 data-lang="en">Featured Reel</h2><h2 data-lang="ru">Шоурил</h2>
-          <div class="hint" data-lang="en">Replace this with your 30s showreel later — for now it uses a sample clip.</div>
-          <div class="hint" data-lang="ru">Позже заменишь на 30‑сек шоурил — сейчас стоит пример.</div>
+        <div class="section__head">
+          <h2 class="h2" data-i18n="showreelTitle">Featured Reel</h2>
+          <p class="hint" data-i18n="showreelHint">Replace this with your 30s showreel later — for now it uses a sample clip.</p>
         </div>
-        <div class="video-wrap">
-          <div class="video-head">
+
+        <div class="reel">
+          <div class="reel__top">
             <b>Showreel</b>
-            <span data-lang="en">Tap play • fullscreen available</span>
-            <span data-lang="ru">Нажми play • есть полный экран</span>
+            <span class="muted" data-i18n="reelTopHint">Tap play • fullscreen available</span>
           </div>
-          <video src="assets/videos/koktl.mp4" controls playsinline preload="metadata"></video>
+          <video class="reel__video" src="assets/videos/koktl.mp4" controls playsinline preload="metadata"></video>
         </div>
       </div>
     </section>
 
-    <section id="best">
+    <!-- BEST 3 -->
+    <section class="section" id="best">
       <div class="container">
-        <div class="section-title">
-          <h2 data-lang="en">Best 3 Clips</h2><h2 data-lang="ru">Топ 3 клипа</h2>
-          <div class="hint" data-lang="en">The strongest proof goes first. Tap to play directly in the card.</div>
-          <div class="hint" data-lang="ru">Самые сильные — первыми. Тап и просмотр прямо в карточке.</div>
+        <div class="section__head">
+          <h2 class="h2" data-i18n="bestTitle">Best 3 Clips</h2>
+          <p class="hint" data-i18n="bestHint">The strongest proof goes first. Tap to play directly in the card.</p>
         </div>
 
-        <div class="grid" style="grid-template-columns:repeat(3,1fr)">
-          <div class="card work" data-src="assets/videos/koktl.mp4">
-            <div class="thumb">
-              <video src="assets/videos/koktl.mp4" playsinline muted preload="metadata"></video>
-              <button class="playbtn" type="button" aria-label="Play">▶</button>
+        <div class="grid grid--3">
+          <!-- Card 1 -->
+          <article class="workcard work" data-src="assets/videos/koktl.mp4">
+            <div class="workcard__media">
+              <video class="workcard__video" src="assets/videos/koktl.mp4" playsinline muted preload="metadata"></video>
+              <button class="play" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="card-body">
-              <div class="title">koktl</div>
-              <div class="sub" data-lang="en">Hook + captions + pacing</div>
-              <div class="sub" data-lang="ru">Хук + сабы + темп</div>
-              <div class="chips"><span class="chip">Hook</span><span class="chip">Captions</span><span class="chip">Pace</span></div>
+            <div class="workcard__body">
+              <div class="workcard__title">koktl</div>
+              <div class="workcard__sub" data-i18n="bestSub1">Hook + captions + pacing</div>
+              <div class="chips">
+                <span class="chip">Hook</span><span class="chip">Captions</span><span class="chip">Pace</span>
+              </div>
             </div>
-          </div>
+          </article>
 
-          <div class="card work" data-src="assets/videos/inst4.mp4">
-            <div class="thumb">
-              <video src="assets/videos/inst4.mp4" playsinline muted preload="metadata"></video>
-              <button class="playbtn" type="button" aria-label="Play">▶</button>
+          <!-- Card 2 -->
+          <article class="workcard work" data-src="assets/videos/inst4.mp4">
+            <div class="workcard__media">
+              <video class="workcard__video" src="assets/videos/inst4.mp4" playsinline muted preload="metadata"></video>
+              <button class="play" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="card-body">
-              <div class="title">inst4</div>
-              <div class="sub" data-lang="en">Subtitles + rhythm</div>
-              <div class="sub" data-lang="ru">Сабы + ритм</div>
-              <div class="chips"><span class="chip">Subtitles</span><span class="chip">Rhythm</span></div>
+            <div class="workcard__body">
+              <div class="workcard__title">inst4</div>
+              <div class="workcard__sub" data-i18n="bestSub2">Subtitles + rhythm</div>
+              <div class="chips">
+                <span class="chip">Subtitles</span><span class="chip">Rhythm</span>
+              </div>
             </div>
-          </div>
+          </article>
 
-          <div class="card work" data-src="assets/videos/diz.mp4">
-            <div class="thumb">
-              <video src="assets/videos/diz.mp4" playsinline muted preload="metadata"></video>
-              <button class="playbtn" type="button" aria-label="Play">▶</button>
+          <!-- Card 3 -->
+          <article class="workcard work" data-src="assets/videos/diz.mp4">
+            <div class="workcard__media">
+              <video class="workcard__video" src="assets/videos/diz.mp4" playsinline muted preload="metadata"></video>
+              <button class="play" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="card-body">
-              <div class="title">diz</div>
-              <div class="sub" data-lang="en">SFX + timing</div>
-              <div class="sub" data-lang="ru">SFX + тайминг</div>
-              <div class="chips"><span class="chip">SFX</span><span class="chip">Timing</span></div>
+            <div class="workcard__body">
+              <div class="workcard__title">diz</div>
+              <div class="workcard__sub" data-i18n="bestSub3">SFX + timing</div>
+              <div class="chips">
+                <span class="chip">SFX</span><span class="chip">Timing</span>
+              </div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="works">
+    <!-- LATEST WORKS (FEED) -->
+    <section class="section" id="works">
       <div class="container">
-        <div class="section-title">
-          <h2 data-lang="en">Latest Works</h2><h2 data-lang="ru">Последние работы</h2>
-          <div class="hint" data-lang="en">Mobile: tap to play. Desktop: click for modal preview.</div>
-          <div class="hint" data-lang="ru">Телефон: тап и просмотр. ПК: клик — предпросмотр в окне.</div>
+        <div class="section__head">
+          <h2 class="h2" data-i18n="worksTitle">Latest Works</h2>
+          <p class="hint" data-i18n="worksHint">Mobile: tap to play. Desktop: click for modal preview.</p>
         </div>
 
-        <div class="grid">
-          <div class="card work" data-src="assets/videos/koktl.mp4">
-            <div class="thumb">
-              <video src="assets/videos/koktl.mp4" playsinline muted preload="metadata"></video>
-              <button class="playbtn" type="button" aria-label="Play">▶</button>
+        <div class="grid grid--3">
+          <article class="workcard work" data-src="assets/videos/koktl.mp4">
+            <div class="workcard__media">
+              <video class="workcard__video" src="assets/videos/koktl.mp4" playsinline muted preload="metadata"></video>
+              <button class="play" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="card-body">
-              <div class="title">koktl</div>
-              <div class="sub">Hook • Captions • Pace</div>
+            <div class="workcard__body">
+              <div class="workcard__title">koktl</div>
+              <div class="workcard__sub">Hook • Captions • Pace</div>
               <div class="chips"><span class="chip">Retention</span><span class="chip">Cuts</span><span class="chip">Captions</span></div>
             </div>
-          </div>
+          </article>
 
-          <div class="card work" data-src="assets/videos/inst4.mp4">
-            <div class="thumb">
-              <video src="assets/videos/inst4.mp4" playsinline muted preload="metadata"></video>
-              <button class="playbtn" type="button" aria-label="Play">▶</button>
+          <article class="workcard work" data-src="assets/videos/inst4.mp4">
+            <div class="workcard__media">
+              <video class="workcard__video" src="assets/videos/inst4.mp4" playsinline muted preload="metadata"></video>
+              <button class="play" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="card-body">
-              <div class="title">inst4</div>
-              <div class="sub">Subtitles • Rhythm</div>
+            <div class="workcard__body">
+              <div class="workcard__title">inst4</div>
+              <div class="workcard__sub">Subtitles • Rhythm</div>
               <div class="chips"><span class="chip">Subtitles</span><span class="chip">Timing</span></div>
             </div>
-          </div>
+          </article>
 
-          <div class="card work" data-src="assets/videos/diz.mp4">
-            <div class="thumb">
-              <video src="assets/videos/diz.mp4" playsinline muted preload="metadata"></video>
-              <button class="playbtn" type="button" aria-label="Play">▶</button>
+          <article class="workcard work" data-src="assets/videos/diz.mp4">
+            <div class="workcard__media">
+              <video class="workcard__video" src="assets/videos/diz.mp4" playsinline muted preload="metadata"></video>
+              <button class="play" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="card-body">
-              <div class="title">diz</div>
-              <div class="sub">SFX • Timing</div>
+            <div class="workcard__body">
+              <div class="workcard__title">diz</div>
+              <div class="workcard__sub">SFX • Timing</div>
               <div class="chips"><span class="chip">SFX</span><span class="chip">Pace</span></div>
             </div>
-          </div>
+          </article>
 
-          <div class="card work" data-src="assets/videos/norm.mp4">
-            <div class="thumb">
-              <video src="assets/videos/norm.mp4" playsinline muted preload="metadata"></video>
-              <button class="playbtn" type="button" aria-label="Play">▶</button>
+          <article class="workcard work" data-src="assets/videos/norm.mp4">
+            <div class="workcard__media">
+              <video class="workcard__video" src="assets/videos/norm.mp4" playsinline muted preload="metadata"></video>
+              <button class="play" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="card-body">
-              <div class="title">norm</div>
-              <div class="sub">Tempo • Flow</div>
+            <div class="workcard__body">
+              <div class="workcard__title">norm</div>
+              <div class="workcard__sub">Tempo • Flow</div>
               <div class="chips"><span class="chip">Flow</span><span class="chip">Cuts</span></div>
             </div>
-          </div>
+          </article>
 
-          <div class="card work" data-src="assets/videos/LOVE.mp4">
-            <div class="thumb">
-              <video src="assets/videos/LOVE.mp4" playsinline muted preload="metadata"></video>
-              <button class="playbtn" type="button" aria-label="Play">▶</button>
+          <article class="workcard work" data-src="assets/videos/LOVE.mp4">
+            <div class="workcard__media">
+              <video class="workcard__video" src="assets/videos/LOVE.mp4" playsinline muted preload="metadata"></video>
+              <button class="play" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="card-body">
-              <div class="title">LOVE</div>
-              <div class="sub">Highlights • Cuts</div>
+            <div class="workcard__body">
+              <div class="workcard__title">LOVE</div>
+              <div class="workcard__sub">Highlights • Cuts</div>
               <div class="chips"><span class="chip">Highlights</span><span class="chip">Punch</span></div>
             </div>
-          </div>
+          </article>
 
-          <div class="card work" data-src="assets/videos/pizza_tt.mp4">
-            <div class="thumb">
-              <video src="assets/videos/pizza_tt.mp4" playsinline muted preload="metadata"></video>
-              <button class="playbtn" type="button" aria-label="Play">▶</button>
+          <article class="workcard work" data-src="assets/videos/pizza_tt.mp4">
+            <div class="workcard__media">
+              <video class="workcard__video" src="assets/videos/pizza_tt.mp4" playsinline muted preload="metadata"></video>
+              <button class="play" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="card-body">
-              <div class="title">pizza_tt</div>
-              <div class="sub">Audio • Clean</div>
+            <div class="workcard__body">
+              <div class="workcard__title">pizza_tt</div>
+              <div class="workcard__sub">Audio • Clean</div>
               <div class="chips"><span class="chip">Audio</span><span class="chip">Captions</span></div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="services">
+    <!-- SERVICES / PRICING -->
+    <section class="section" id="services">
       <div class="container">
-        <div class="section-title">
-          <h2 data-lang="en">Services</h2><h2 data-lang="ru">Услуги</h2>
-          <div class="hint" data-lang="en">Simple, predictable packages. Fast delivery.</div>
-          <div class="hint" data-lang="ru">Простые пакеты. Быстрая выдача.</div>
+        <div class="section__head">
+          <h2 class="h2" data-i18n="servicesTitle">Services / Pricing</h2>
+          <p class="hint" data-i18n="servicesHint">Simple packages, predictable workflow, fast delivery.</p>
         </div>
 
-        <div class="cards2">
-          <div class="list">
-            <div class="li">
-              <div class="ic"></div>
+        <div class="twocol">
+          <div class="stack">
+            <div class="item">
+              <div class="item__dot" aria-hidden="true"></div>
               <div>
-                <b data-lang="en">Short-form editing</b><b data-lang="ru">Монтаж коротких видео</b>
-                <p data-lang="en">TikTok / Reels / Shorts built around hooks and retention.</p>
-                <p data-lang="ru">TikTok / Reels / Shorts с упором на хук и удержание.</p>
+                <b data-i18n="srv1T">Short-form editing</b>
+                <p data-i18n="srv1D">TikTok / Reels / Shorts built around hooks and retention. Clean pacing, punchlines, emphasis.</p>
               </div>
             </div>
-            <div class="li">
-              <div class="ic"></div>
+
+            <div class="item">
+              <div class="item__dot" aria-hidden="true"></div>
               <div>
-                <b data-lang="en">Captions & retention</b><b data-lang="ru">Субтитры и удержание</b>
-                <p data-lang="en">Readable subtitles, emphasis, structure — made to keep viewers.</p>
-                <p data-lang="ru">Читаемые субтитры, акценты, структура — чтобы досматривали.</p>
+                <b data-i18n="srv2T">Captions & retention</b>
+                <p data-i18n="srv2D">Readable subtitles, structure, highlighting key words — designed to keep viewers watching.</p>
               </div>
             </div>
-            <div class="li">
-              <div class="ic"></div>
+
+            <div class="item">
+              <div class="item__dot" aria-hidden="true"></div>
               <div>
-                <b data-lang="en">AI‑enhanced workflow</b><b data-lang="ru">AI‑технологии</b>
-                <p data-lang="en">Cleanup, enhancement, automation — speed + quality.</p>
-                <p data-lang="ru">Чистка, улучшение, автоматизация — скорость + качество.</p>
+                <b data-i18n="srv3T">AI-enhanced workflow</b>
+                <p data-i18n="srv3D">Cleanup, enhancement, automation — faster iteration without losing quality.</p>
               </div>
             </div>
           </div>
 
           <div class="panel">
-            <h3 data-lang="en">Pricing</h3><h3 data-lang="ru">Цены</h3>
-            <p><span class="mono" style="font-weight:1000">2,000 ₽</span> <span data-lang="en">per premium short (client).</span><span data-lang="ru">за premium short (клиент).</span></p>
-            <p><span class="mono" style="font-weight:1000">80,000 ₽</span> <span data-lang="en">/ month (full‑time).</span><span data-lang="ru">/ месяц (найм).</span></p>
-            <div class="sep" style="margin:14px 0"></div>
-            <p data-lang="en"><b>What I need:</b> reference clips + brief + deadline. I can propose hook variants and caption style.</p>
-            <p data-lang="ru"><b>Что нужно:</b> референсы + ТЗ + дедлайн. Могу предложить варианты хука и стиля сабов.</p>
-            <div class="row">
-              <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">
-                <span data-lang="en">Message on Telegram</span><span data-lang="ru">Написать в Telegram</span>
-              </a>
-              <a class="btn" href="#works"><span data-lang="en">See works</span><span data-lang="ru">Работы</span></a>
+            <h3 class="h3" data-i18n="priceTitle">Pricing</h3>
+
+            <div class="panel__rows">
+              <div class="row">
+                <span class="row__k" data-i18n="priceRow1K">Premium short</span>
+                <span class="row__v mono">2,000 ₽</span>
+              </div>
+              <div class="row">
+                <span class="row__k" data-i18n="priceRow2K">Full-time (month)</span>
+                <span class="row__v mono">80,000 ₽</span>
+              </div>
+            </div>
+
+            <div class="hr"></div>
+
+            <p class="muted" data-i18n="priceNote">
+              To start: send a clip + references + deadline. I can propose hook options and subtitle style.
+            </p>
+
+            <div class="panel__actions">
+              <a class="btn btn--primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer" data-i18n="ctaTelegramFast">Message on Telegram</a>
+              <a class="btn btn--ghost" href="#contact" data-i18n="ctaHire">Hire me</a>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="before-after">
+    <!-- BEFORE / AFTER -->
+    <section class="section" id="before-after">
       <div class="container">
-        <div class="section-title">
-          <h2 data-lang="en">Before / After</h2><h2 data-lang="ru">До / После</h2>
-          <div class="hint" data-lang="en">Drop your pairs here later (raw → final). This section increases trust a lot.</div>
-          <div class="hint" data-lang="ru">Позже добавь пары (сырьё → финал). Этот блок сильно повышает доверие.</div>
+        <div class="section__head">
+          <h2 class="h2" data-i18n="baTitle">Before / After</h2>
+          <p class="hint" data-i18n="baHint">Add your pairs later (raw → final). This section boosts trust a lot.</p>
         </div>
 
-        <div class="ba">
-          <div class="ba-item">
-            <h3 data-lang="en">Pair #1</h3><h3 data-lang="ru">Пара #1</h3>
-            <p data-lang="en">Placeholders — add “before” and “after” videos/screenshots.</p>
-            <p data-lang="ru">Заглушки — добавишь видео/скрины до и после.</p>
-            <div class="ph" data-lang="en">Drop media here later</div>
-            <div class="ph" data-lang="ru">Позже вставишь медиа</div>
+        <div class="grid grid--2">
+          <div class="placeholder">
+            <div class="placeholder__top">
+              <b data-i18n="baPair1">Pair #1</b>
+              <span class="muted" data-i18n="addLater">(add later)</span>
+            </div>
+            <div class="placeholder__box" data-i18n="dropHere">Drop media here later</div>
           </div>
-          <div class="ba-item">
-            <h3 data-lang="en">Pair #2</h3><h3 data-lang="ru">Пара #2</h3>
-            <p data-lang="en">Keep it simple: raw clip + finished version.</p>
-            <p data-lang="ru">Просто: сырой клип + итоговая версия.</p>
-            <div class="ph" data-lang="en">Drop media here later</div>
-            <div class="ph" data-lang="ru">Позже вставишь медиа</div>
+
+          <div class="placeholder">
+            <div class="placeholder__top">
+              <b data-i18n="baPair2">Pair #2</b>
+              <span class="muted" data-i18n="addLater">(add later)</span>
+            </div>
+            <div class="placeholder__box" data-i18n="dropHere">Drop media here later</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="reviews">
+    <!-- PROOF / RESULTS -->
+    <section class="section" id="results">
       <div class="container">
-        <div class="section-title">
-          <h2 data-lang="en">Reviews</h2><h2 data-lang="ru">Отзывы</h2>
-          <div class="hint" data-lang="en">Add screenshots of feedback — it converts best.</div>
-          <div class="hint" data-lang="ru">Добавь скрины отзывов — лучше всего конвертит.</div>
+        <div class="section__head">
+          <h2 class="h2" data-i18n="resTitle">Proof / Results</h2>
+          <p class="hint" data-i18n="resHint">Place screenshots of analytics: views, retention, CTR, watch time.</p>
         </div>
 
-        <div class="reviews">
-          <div class="review">
-            <b data-lang="en">Client #1</b><b data-lang="ru">Клиент #1</b>
-            <p data-lang="en">Place your testimonial screenshot here.</p>
-            <p data-lang="ru">Сюда вставишь скрин отзыва.</p>
-            <div class="ph" data-lang="en">Screenshot placeholder</div>
-            <div class="ph" data-lang="ru">Заглушка скрина</div>
+        <div class="grid grid--3">
+          <div class="placeholder placeholder--small">
+            <div class="placeholder__top">
+              <b data-i18n="resCard1">Analytics screenshot</b>
+              <span class="muted" data-i18n="addLater">(add later)</span>
+            </div>
+            <div class="placeholder__box placeholder__box--small">1080×1920</div>
           </div>
-          <div class="review">
-            <b data-lang="en">Client #2</b><b data-lang="ru">Клиент #2</b>
-            <p data-lang="en">Keep it short: what improved + why they recommend you.</p>
-            <p data-lang="ru">Коротко: что улучшилось + почему рекомендуют.</p>
-            <div class="ph" data-lang="en">Screenshot placeholder</div>
-            <div class="ph" data-lang="ru">Заглушка скрина</div>
+
+          <div class="placeholder placeholder--small">
+            <div class="placeholder__top">
+              <b data-i18n="resCard2">Retention graph</b>
+              <span class="muted" data-i18n="addLater">(add later)</span>
+            </div>
+            <div class="placeholder__box placeholder__box--small">1080×1920</div>
           </div>
-          <div class="review">
-            <b data-lang="en">Client #3</b><b data-lang="ru">Клиент #3</b>
-            <p data-lang="en">Optional: add a metric screenshot (views, retention).</p>
-            <p data-lang="ru">Можно: скрин метрик (просмотры, удержание).</p>
-            <div class="ph" data-lang="en">Screenshot placeholder</div>
-            <div class="ph" data-lang="ru">Заглушка скрина</div>
+
+          <div class="placeholder placeholder--small">
+            <div class="placeholder__top">
+              <b data-i18n="resCard3">Client result</b>
+              <span class="muted" data-i18n="addLater">(add later)</span>
+            </div>
+            <div class="placeholder__box placeholder__box--small">1080×1920</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="contact">
+    <!-- REVIEWS -->
+    <section class="section" id="reviews">
       <div class="container">
-        <div class="section-title">
-          <h2 data-lang="en">Contact</h2><h2 data-lang="ru">Контакты</h2>
-          <div class="hint" data-lang="en">Fastest way: Telegram. I can start with a test edit.</div>
-          <div class="hint" data-lang="ru">Самое быстрое: Telegram. Можно начать с тестового монтажа.</div>
+        <div class="section__head">
+          <h2 class="h2" data-i18n="revTitle">Reviews</h2>
+          <p class="hint" data-i18n="revHint">Add screenshots of feedback — it converts best.</p>
         </div>
 
-        <div class="contact">
+        <div class="grid grid--3">
+          <div class="review">
+            <b data-i18n="rev1">Client #1</b>
+            <p class="muted" data-i18n="revText">Place your testimonial screenshot here.</p>
+            <div class="review__box" data-i18n="dropHere">Drop media here later</div>
+          </div>
+
+          <div class="review">
+            <b data-i18n="rev2">Client #2</b>
+            <p class="muted" data-i18n="revText2">Keep it short: what improved + why they recommend you.</p>
+            <div class="review__box" data-i18n="dropHere">Drop media here later</div>
+          </div>
+
+          <div class="review">
+            <b data-i18n="rev3">Client #3</b>
+            <p class="muted" data-i18n="revText3">Optional: add a metric screenshot next to the review.</p>
+            <div class="review__box" data-i18n="dropHere">Drop media here later</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="h2" data-i18n="contactTitle">Contact</h2>
+          <p class="hint" data-i18n="contactHint">Fastest way: Telegram. We can start with a test edit.</p>
+        </div>
+
+        <div class="twocol">
           <div class="panel">
-            <h3 data-lang="en">Let’s make your shorts watchable</h3>
-            <h3 data-lang="ru">Сделаем шортсы досматриваемыми</h3>
-            <p data-lang="en">Send a clip + references + deadline. I’ll propose hook options and subtitle style.</p>
-            <p data-lang="ru">Пришли клип + референсы + дедлайн. Предложу варианты хука и стиль сабов.</p>
-            <div class="row">
-              <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Telegram</a>
-              <a class="btn" href="mailto:alex.altukhov.s@gmail.com">alex.altukhov.s@gmail.com</a>
+            <h3 class="h3" data-i18n="contactH">Let’s make your shorts watchable</h3>
+            <p class="muted" data-i18n="contactP">Send a clip + references + deadline. I’ll propose hook options and subtitle style.</p>
+
+            <div class="panel__actions">
+              <a class="btn btn--primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer" data-i18n="ctaTelegramFast">Message on Telegram</a>
+              <a class="btn btn--ghost" href="mailto:alex.altukhov.s@gmail.com">alex.altukhov.s@gmail.com</a>
             </div>
           </div>
 
           <div class="panel">
-            <h3 data-lang="en">Availability</h3><h3 data-lang="ru">Доступность</h3>
-            <p data-lang="en"><b>Status:</b> open for clients and full‑time roles.</p>
-            <p data-lang="ru"><b>Статус:</b> открыт для клиентов и найма.</p>
-            <p data-lang="en"><b>Turnaround:</b> same day / next day (depends on volume).</p>
-            <p data-lang="ru"><b>Срок:</b> сегодня / завтра (зависит от объёма).</p>
-            <div class="sep" style="margin:14px 0"></div>
-            <p data-lang="en">Tip: add screenshots of results here later (views, retention, CTR).</p>
-            <p data-lang="ru">Совет: позже добавь скрины результатов (просмотры, удержание, CTR).</p>
+            <h3 class="h3" data-i18n="availTitle">Availability</h3>
+            <p class="muted" data-i18n="avail1"><b>Status:</b> open for clients and full-time roles.</p>
+            <p class="muted" data-i18n="avail2"><b>Turnaround:</b> same day / next day (depends on volume).</p>
+
+            <div class="hr"></div>
+
+            <p class="muted" data-i18n="avail3">
+              Tip: add screenshots of results here later (views, retention, CTR).
+            </p>
+          </div>
+        </div>
+
+        <div class="finalcta">
+          <div class="finalcta__inner">
+            <div>
+              <div class="finalcta__title" data-i18n="finalTitle">Ready to boost retention?</div>
+              <div class="finalcta__sub" data-i18n="finalSub">Send one clip — I’ll do a test edit and propose hooks.</div>
+            </div>
+            <div class="finalcta__actions">
+              <a class="btn btn--primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer" data-i18n="ctaTest">Get a test edit</a>
+              <a class="btn btn--ghost" href="#works" data-i18n="ctaWorks">See works</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>© <span id="year"></span> Alex A</div>
+        <div class="muted">GitHub Pages • Dark premium • Ultra-minimal</div>
+      </div>
+    </footer>
   </main>
 
-  <!-- Video modal (desktop preview) -->
+  <!-- Desktop video modal -->
   <div class="vmodal" id="vModal" aria-hidden="true">
-    <div class="vmodal-backdrop" id="vModalBackdrop"></div>
-    <div class="vmodal-inner" role="dialog" aria-label="Video preview">
-      <div class="vmodal-top">
-        <div class="vmodal-title" id="vModalTitle">Preview</div>
-        <button class="btn small" id="vModalClose" type="button" aria-label="Close">✕</button>
+    <div class="vmodal__backdrop" id="vBackdrop"></div>
+    <div class="vmodal__card" role="dialog" aria-label="Video preview">
+      <div class="vmodal__top">
+        <div class="vmodal__title" id="vTitle">Preview</div>
+        <button class="iconbtn" id="vClose" type="button" aria-label="Close">✕</button>
       </div>
-      <div class="vmodal-video">
-        <video id="vModalVideo" controls playsinline preload="metadata"></video>
+      <div class="vmodal__media">
+        <video id="vVideo" controls playsinline preload="metadata"></video>
       </div>
     </div>
   </div>
 
   <!-- Mobile floating CTA -->
-  <div class="float-cta" id="floatCta" aria-label="Quick contact">
-    <a class="float-btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">
-      <span data-lang="en">Get a test edit</span><span data-lang="ru">Тестовый монтаж</span>
+  <div class="floatcta" id="floatCta" aria-label="Quick contact">
+    <a class="floatcta__btn floatcta__btn--primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">
+      <span data-i18n="ctaTest">Get a test edit</span>
     </a>
-    <a class="float-btn" href="#contact">
-      <span data-lang="en">Hire me</span><span data-lang="ru">Нанять</span>
+    <a class="floatcta__btn" href="#contact">
+      <span data-i18n="ctaHire">Hire me</span>
     </a>
   </div>
 
-  <footer>
-    <div class="container">
-      <div>© <span id="year"></span> Alex A</div>
-      <div class="mono">GitHub Pages • Dark premium • Minimal</div>
-    </div>
-  </footer>
-
-  <script>
-    const d = new Date();
-    document.getElementById('year').textContent = d.getFullYear();
-    document.getElementById('today').textContent = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
-
-    // Language toggle
-    const enBtn = document.getElementById('enBtn');
-    const ruBtn = document.getElementById('ruBtn');
-    function setLang(lang){
-      document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
-      document.querySelectorAll('[data-lang]').forEach(el => {
-        el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
-      });
-      enBtn.classList.toggle('active', lang === 'en');
-      ruBtn.classList.toggle('active', lang === 'ru');
-      localStorage.setItem('lang', lang);
-    }
-    const saved = localStorage.getItem('lang') || 'en';
-    setLang(saved);
-    enBtn.addEventListener('click', ()=>setLang('en'));
-    ruBtn.addEventListener('click', ()=>setLang('ru'));
-
-    // Mobile drawer
-    const menuBtn = document.getElementById('menuBtn');
-    const menuClose = document.getElementById('menuClose');
-    const drawer = document.getElementById('drawer');
-    function openMenu(){ document.body.classList.add('nav-open'); drawer?.setAttribute('aria-hidden','false'); }
-    function closeMenu(){ document.body.classList.remove('nav-open'); drawer?.setAttribute('aria-hidden','true'); }
-    menuBtn?.addEventListener('click', openMenu);
-    menuClose?.addEventListener('click', closeMenu);
-    drawer?.addEventListener('click', (e)=>{ if(e.target === drawer) closeMenu(); });
-    document.querySelectorAll('.drawer-link').forEach(a=>a.addEventListener('click', closeMenu));
-
-    // Scroll hide header
-    (function(){
-      let lastY = window.scrollY || 0;
-      let ticking = false;
-      function onScroll(){
-        if(ticking) return;
-        ticking = true;
-        requestAnimationFrame(()=>{
-          const y = window.scrollY || 0;
-          const dy = y - lastY;
-          if(Math.abs(dy) > 8){
-            if(dy > 0 && y > 80){
-              document.body.classList.add('scroll-down');
-              document.body.classList.remove('scroll-up');
-            } else {
-              document.body.classList.add('scroll-up');
-              document.body.classList.remove('scroll-down');
-            }
-            lastY = y;
-          }
-          ticking = false;
-        });
-      }
-      document.body.classList.add('scroll-up');
-      window.addEventListener('scroll', onScroll, {passive:true});
-    })();
-
-    // Video playback in cards + desktop modal
-    const isCoarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
-
-    function pauseAll(except){
-      document.querySelectorAll('video').forEach(v => {
-        if(v !== except && v.id !== 'vModalVideo'){
-          try{ v.pause(); v.currentTime = 0; }catch(e){}
-          v.closest('.playing')?.classList.remove('playing');
-          if(v.closest('.work')) v.muted = true;
-        }
-      });
-    }
-    function bindCard(card){
-      const v = card.querySelector('video');
-      const btn = card.querySelector('.playbtn');
-      const src = card.getAttribute('data-src');
-      if(!v || !btn || !src) return;
-
-      v.muted = true;
-      v.playsInline = true;
-
-      function playInline(){
-        pauseAll(v);
-        card.classList.add('playing');
-        v.controls = true;
-        v.play().catch(()=>{});
-      }
-
-      btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); playInline(); });
-
-      card.addEventListener('click', (e)=>{
-        if(isCoarse){
-          if(v.paused) playInline();
-        } else {
-          if(e.target && e.target.classList && e.target.classList.contains('playbtn')) return;
-          e.preventDefault();
-          openModal(src, card.querySelector('.title')?.textContent || 'Preview');
-        }
-      });
-
-      v.addEventListener('pause', ()=>{ card.classList.remove('playing'); });
-      v.addEventListener('ended', ()=>{ card.classList.remove('playing'); });
-    }
-    document.querySelectorAll('.work[data-src]').forEach(bindCard);
-
-    // Modal logic
-    const vModal = document.getElementById('vModal');
-    const vModalVideo = document.getElementById('vModalVideo');
-    const vModalTitle = document.getElementById('vModalTitle');
-    const vModalClose = document.getElementById('vModalClose');
-    const vModalBackdrop = document.getElementById('vModalBackdrop');
-
-    function openModal(src, title){
-      if(!vModal || !vModalVideo) return;
-      document.body.classList.add('vmodal-open');
-      vModal.setAttribute('aria-hidden','false');
-      vModalVideo.src = src;
-      vModalTitle.textContent = title || 'Preview';
-      vModalVideo.play().catch(()=>{});
-    }
-    function closeModal(){
-      if(!vModal || !vModalVideo) return;
-      document.body.classList.remove('vmodal-open');
-      vModal.setAttribute('aria-hidden','true');
-      try{ vModalVideo.pause(); vModalVideo.currentTime = 0; }catch(e){}
-      vModalVideo.removeAttribute('src');
-      vModalVideo.load();
-    }
-    vModalClose?.addEventListener('click', closeModal);
-    vModalBackdrop?.addEventListener('click', closeModal);
-    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
-
-    // Floating CTA hide near contact
-    const floatCta = document.getElementById('floatCta');
-    const contactEl = document.getElementById('contact');
-    function updateFloatCta(){
-      if(!floatCta || !contactEl) return;
-      const r = contactEl.getBoundingClientRect();
-      const nearContact = r.top < window.innerHeight * 0.65;
-      floatCta.style.opacity = nearContact ? '0' : '1';
-      floatCta.style.pointerEvents = nearContact ? 'none' : 'auto';
-    }
-    window.addEventListener('scroll', updateFloatCta, {passive:true});
-    window.addEventListener('resize', updateFloatCta);
-    updateFloatCta();
-
-    // Cmd/Ctrl+K: jump to Works
-    window.addEventListener('keydown', (e)=>{
-      const isMac = navigator.platform.toLowerCase().includes('mac');
-      if((isMac ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'k'){
-        e.preventDefault();
-        document.getElementById('works')?.scrollIntoView({behavior:'smooth'});
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
