@@ -2,339 +2,263 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Alex A (Александр Алтухов) — Short-form Video Editor (TikTok/Reels/Shorts), YouTube, Stream Clips. Captions, hooks, pacing, AI workflow." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alex A — Video Editor Portfolio</title>
+  <meta name="description" content="Short-form video editor. Hooks, captions, pacing. TikTok/Reels/Shorts, YouTube, stream highlights." />
   <meta property="og:title" content="Alex A — Video Editor (Shorts / Reels / TikTok)" />
   <meta property="og:description" content="Short-form video editor. Hooks, captions, pacing. TikTok/Reels/Shorts, YouTube, stream highlights." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0b0d10" />
-  <title>Alex A — Video Editor Portfolio</title>
+
   <style>
     :root{
       --bg:#0b0d10;
-      --text:#eef2f6;
-      --muted:#a7b0bb;
+      --bg2:#0f1217;
+      --card:rgba(255,255,255,.03);
+      --card2:rgba(255,255,255,.05);
       --line:rgba(255,255,255,.10);
-      --accent:#e9ecef;
-      --chip:rgba(255,255,255,.06);
-      --shadow: 0 12px 40px rgba(0,0,0,.45);
-      --radius:18px;
-      --radius2:26px;
-      --max:1120px;
+      --line2:rgba(255,255,255,.16);
+      --text:#e9ecef;
+      --muted:rgba(233,236,239,.70);
+      --muted2:rgba(233,236,239,.56);
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --radius:24px;
+      --radius2:18px;
+      --max:1160px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 800px at 20% 0%, rgba(255,255,255,.08), transparent 60%),
-                  radial-gradient(900px 600px at 90% 10%, rgba(255,255,255,.05), transparent 60%),
-                  var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1200px 800px at 15% -10%, rgba(233,236,239,.06), transparent 55%),
+        radial-gradient(900px 600px at 85% 10%, rgba(233,236,239,.05), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
       color:var(--text);
-      line-height:1.45;
+      letter-spacing:.1px;
     }
     a{color:inherit; text-decoration:none}
-    .container{max-width:var(--max); margin:0 auto; padding:0 20px}
-
-    .topbar{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(11,13,16,.65);
-      border-bottom:1px solid var(--line);
+    .container{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .mono{font-variant-numeric: tabular-nums; font-feature-settings:"tnum" 1}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-weight:900; font-size:12px;
     }
-    .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0}
-    .brand{display:flex; align-items:center; gap:10px; min-width:220px}
-    .dot{width:10px; height:10px; border-radius:999px; background:var(--accent); box-shadow:0 0 0 6px rgba(233,236,239,.12)}
-    .brand-title{font-weight:700; letter-spacing:.3px}
-    .brand-sub{color:var(--muted); font-size:12px}
-
-    .nav{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
-    .nav a{color:var(--muted); font-size:13px; padding:8px 10px; border-radius:999px; border:1px solid transparent}
-    .nav a:hover{color:var(--text); border-color:var(--line); background:rgba(255,255,255,.03)}
-
-    .actions{display:flex; gap:10px; align-items:center; justify-content:flex-end; min-width:220px}
+    .dot{width:8px;height:8px;border-radius:50%; background:rgba(233,236,239,.95); box-shadow:0 0 0 6px rgba(233,236,239,.10)}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
+      padding:12px 14px; border-radius:999px;
       border:1px solid var(--line);
       background:rgba(255,255,255,.03);
       color:var(--text);
-      font-weight:600;
-      font-size:13px;
+      font-weight:900; font-size:13px;
       cursor:pointer;
-      transition: transform .08s ease, background .12s ease, border-color .12s ease;
-      user-select:none;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
-    .btn:hover{background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.16)}
+    .btn:hover{background:rgba(255,255,255,.05); border-color:var(--line2)}
     .btn:active{transform:translateY(1px)}
-    .btn.primary{background:rgba(233,236,239,.12); border-color:rgba(233,236,239,.24)}
-    .btn.primary:hover{background:rgba(233,236,239,.16)}
+    .btn.primary{background:rgba(233,236,239,.12); border-color:rgba(233,236,239,.22)}
+    .btn.small{padding:9px 11px; font-size:12px}
+    .kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size:11px; padding:3px 6px; border-radius:8px; border:1px solid var(--line); color:var(--muted);}
+    .sep{height:1px; background:var(--line); width:100%}
 
-    .lang{
-      display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden;
-      background:rgba(255,255,255,.02)
+    /* Awwwards-like topbar */
+    .topbar{
+      position:sticky; top:0; z-index:60;
+      background:rgba(11,13,16,.65);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      transition: transform .18s ease;
     }
-    .lang button{
-      border:0; background:transparent; color:var(--muted); cursor:pointer;
-      padding:8px 10px; font-size:12px; font-weight:700; letter-spacing:.4px
-    }
-    .lang button.active{color:var(--text); background:rgba(255,255,255,.06)}
+    body.scroll-down .topbar{transform: translateY(-110%)}
+    body.scroll-up .topbar{transform: translateY(0)}
+    body.nav-open .topbar{transform: translateY(0)}
 
-    section{padding:54px 0}
-    .hero{padding:64px 0 40px}
-    .grid-hero{display:grid; grid-template-columns: 1.35fr .65fr; gap:22px; align-items:stretch}
-    @media (max-width: 980px){.grid-hero{grid-template-columns:1fr}}
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid var(--line);
-      border-radius:var(--radius2);
-      box-shadow:var(--shadow);
-    }
-    .card-inner{padding:26px}
-
-    h1{margin:0 0 10px; font-size:42px; line-height:1.08; letter-spacing:-.6px}
-    @media (max-width: 520px){h1{font-size:34px}}
-    .lead{color:var(--muted); font-size:16px; margin:0 0 18px}
-
-    .chips{display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0}
-    .chip{border:1px solid var(--line); background:var(--chip); color:var(--text); border-radius:999px; padding:8px 10px; font-size:12px}
-    .chip b{font-weight:800}
-
-    .stats{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px}
-    .stat{border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:14px; padding:12px 12px}
-    .stat .k{color:var(--muted); font-size:12px}
-    .stat .v{font-weight:800; margin-top:2px}
-
-    .aside{display:flex; flex-direction:column; gap:12px}
-    .panel{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:var(--radius2);
-      padding:16px;
-    }
-    .panel h3{margin:0 0 6px; font-size:13px; letter-spacing:.3px; text-transform:uppercase; color:var(--muted)}
-    .panel p{margin:0; color:var(--text); font-size:14px}
-
-    .section-title{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:18px}
-    .section-title h2{margin:0; font-size:20px; letter-spacing:.2px}
-    .section-title .hint{color:var(--muted); font-size:13px}
-
-    .video{
-      position:relative; border-radius:var(--radius2);
-      overflow:hidden; border:1px solid var(--line);
-      background: rgba(255,255,255,.02);
-      aspect-ratio: 16 / 9;
-    }
-    .video video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block}
-    .video .overlay{
-      position:absolute; inset:auto 14px 14px 14px;
-      display:flex; justify-content:space-between; align-items:flex-end; gap:10px;
-      pointer-events:none;
-    }
-    .overlay .badge{
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.35);
-      backdrop-filter: blur(6px);
-      color:var(--text);
-      border-radius:999px;
-      padding:8px 10px;
-      font-size:12px;
-      font-weight:800;
-    }
-
-    .works-grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
-    @media (max-width: 980px){.works-grid{grid-template-columns:repeat(2, 1fr)}}
-    @media (max-width: 560px){.works-grid{grid-template-columns:1fr}}
-    .work{border-radius:var(--radius); border:1px solid var(--line); background:rgba(255,255,255,.03); overflow:hidden}
-    .work .thumb{aspect-ratio:16/9; background:rgba(255,255,255,.02); overflow:hidden}
-    .work .thumb video{width:100%; height:100%; object-fit:cover; display:block}
-    .work .meta{padding:12px}
-    .work .title{font-weight:800; font-size:14px}
-    .work .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
-    .tag{font-size:11px; color:var(--muted); border:1px solid var(--line); background:rgba(255,255,255,.02); border-radius:999px; padding:6px 8px}
-
-    .cards3{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
-    @media (max-width: 980px){.cards3{grid-template-columns:1fr}}
-    .svc{padding:18px; border-radius:var(--radius2); border:1px solid var(--line); background:rgba(255,255,255,.03)}
-    .svc h3{margin:0 0 6px; font-size:16px}
-    .svc p{margin:0; color:var(--muted)}
-
-    .tabs{display:flex; gap:8px; align-items:center}
-    .tab{padding:8px 10px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--muted); cursor:pointer; font-weight:800; font-size:12px}
-    .tab.active{color:var(--text); background:rgba(255,255,255,.06)}
-    .pricing{display:grid; grid-template-columns: 1.1fr .9fr; gap:14px}
-    @media (max-width: 980px){.pricing{grid-template-columns:1fr}}
-    .pricebox{padding:20px; border-radius:var(--radius2); border:1px solid var(--line); background:rgba(255,255,255,.03)}
-    .pricebox .big{font-size:26px; font-weight:900; letter-spacing:-.4px}
-    .pricebox .sub{color:var(--muted); margin-top:6px}
-    .pricebox .note{margin-top:14px; border-top:1px solid var(--line); padding-top:12px; color:var(--muted); font-size:13px}
-
-    .ba{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
-    @media (max-width: 980px){.ba{grid-template-columns:1fr}}
-    .ba-item{border-radius:var(--radius2); border:1px solid var(--line); background:rgba(255,255,255,.03); padding:14px}
-    .ba-item .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
-    @media (max-width: 520px){.ba-item .row{grid-template-columns:1fr}}
-    .mini{
-      border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.02);
-      aspect-ratio: 16/9; display:flex; align-items:center; justify-content:center;
-      color:var(--muted); font-size:12px; text-align:center; padding:10px;
-    }
-
-    .tiles{display:grid; grid-template-columns:repeat(4, 1fr); gap:12px}
-    @media (max-width: 980px){.tiles{grid-template-columns:repeat(2, 1fr)}}
-    .tile{border-radius:var(--radius2); border:1px solid var(--line); background:rgba(255,255,255,.03); padding:14px}
-    .tile .k{color:var(--muted); font-size:12px}
-    .tile .v{font-weight:900; margin-top:8px; font-size:14px}
-    .tile .ph{margin-top:10px; color:var(--muted); font-size:12px; border-top:1px dashed rgba(255,255,255,.18); padding-top:10px}
-
-    .reviews{display:grid; grid-template-columns:repeat(3, 1fr); gap:12px}
-    @media (max-width: 980px){.reviews{grid-template-columns:1fr}}
-    .review{border-radius:var(--radius2); border:1px solid var(--line); background:rgba(255,255,255,.03); padding:14px}
-    .review .img{border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.02); aspect-ratio: 4/3; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:12px; text-align:center; padding:12px}
-
-    footer{padding:34px 0 50px; border-top:1px solid var(--line); color:var(--muted)}
-    [data-lang]{display:none}
-    body.lang-en [data-lang="en"], body.lang-ru [data-lang="ru"]{display:block}
-    [id]{scroll-margin-top:80px}
-    .row-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
-  
-    /* ---------- Global polish ---------- */
-    section{border-top:1px solid rgba(255,255,255,.08)}
-    section.hero{border-top:0}
-    .lead{max-width:62ch}
-    .panel p{color:var(--muted)}
-    .panel b{color:var(--text)}
-    .section-title{padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,.08)}
-    .section-title .hint{max-width:54ch; text-align:right}
-    @media (max-width: 980px){ .section-title .hint{display:none} }
-
-    /* ---------- Mobile drawer ---------- */
+    .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 0}
+    .brand{display:flex; align-items:center; gap:10px; min-width:200px}
+    .brand-title{font-weight:1000; letter-spacing:.2px}
+    .brand-sub{color:var(--muted2); font-size:12px; margin-top:2px}
+    .nav{display:flex; gap:12px; align-items:center}
+    .nav a{color:var(--muted); font-weight:800; font-size:12px; letter-spacing:.2px}
+    .nav a:hover{color:var(--text)}
+    .actions{display:flex; align-items:center; gap:10px}
+    .lang{display:flex; gap:6px; align-items:center}
+    .lang button{border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--muted); font-weight:900; padding:9px 10px; border-radius:999px; cursor:pointer}
+    .lang button.active{color:var(--text); border-color:rgba(233,236,239,.24); background:rgba(233,236,239,.10)}
     #menuBtn{display:none}
+
+    /* Mobile drawer */
     .drawer{display:none}
-    .drawer-inner{max-width:520px; width:100%}
-    .drawer-title{font-weight:900; letter-spacing:.2px}
-    .drawer-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px}
-    .drawer-links{display:flex; flex-direction:column; gap:8px; margin:14px 0}
-    .drawer-link{
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      color:var(--text);
-      font-weight:800;
-      font-size:14px;
-    }
-    .drawer-link:hover{background:rgba(255,255,255,.05)}
-    .drawer-cta{display:flex; gap:10px; flex-wrap:wrap}
     body.nav-open{overflow:hidden}
     body.nav-open .drawer{
-      display:flex;
-      position:fixed;
-      inset:0;
-      z-index:80;
-      background:rgba(0,0,0,.55);
-      backdrop-filter: blur(6px);
-      align-items:flex-end;
-      justify-content:center;
-      padding:14px;
+      display:flex; position:fixed; inset:0; z-index:90;
+      background:rgba(0,0,0,.58); backdrop-filter: blur(6px);
+      align-items:flex-end; justify-content:center; padding:14px;
     }
-    body.nav-open .drawer-inner{
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:24px;
-      padding:16px;
+    .drawer-inner{
+      width:100%; max-width:560px;
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:26px; padding:16px;
       box-shadow: var(--shadow);
     }
+    .drawer-top{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .drawer-title{font-weight:1000}
+    .drawer-links{display:flex; flex-direction:column; gap:8px; margin:12px 0}
+    .drawer-link{padding:12px 12px; border-radius:16px; border:1px solid var(--line); background:rgba(255,255,255,.03); font-weight:900}
+    .drawer-cta{display:flex; gap:10px; flex-wrap:wrap}
 
-    /* ---------- Video UX ---------- */
+    /* Sections */
+    section{padding:72px 0; border-top:1px solid rgba(255,255,255,.08)}
+    section.hero{border-top:0; padding:64px 0 56px}
+    .section-title{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:18px}
+    .section-title h2{margin:0; font-size:20px; letter-spacing:.2px}
+    .hint{color:var(--muted); font-size:13px; max-width:62ch; text-align:right}
+
+    /* Hero layout inspired by Awwwards "Site of the Day" card + feed */
+    .hero-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:16px; align-items:start}
+    .hero-card{
+      border:1px solid rgba(255,255,255,.14);
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-card-inner{padding:20px}
+    h1{margin:0; font-size:44px; line-height:1.05; letter-spacing:-.6px}
+    .lead{color:var(--muted); margin:12px 0 0; font-size:15px; max-width:70ch}
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+    .hero-meta{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-top:16px}
+    .meta-box{border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:16px; padding:12px}
+    .meta-k{color:var(--muted2); font-size:12px}
+    .meta-v{font-weight:1000; margin-top:2px; font-size:13px}
+
+    .score-panel{
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.03);
+      border-radius:var(--radius);
+      padding:18px;
+    }
+    .score-top{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .score-title{font-weight:1000}
+    .score-big{font-size:34px; font-weight:1000; letter-spacing:-.6px}
+    .score-sub{color:var(--muted); font-size:12px; margin-top:4px}
+    .score-bars{margin-top:14px; display:grid; gap:10px}
+    .bar{display:grid; grid-template-columns: 86px 1fr 44px; gap:10px; align-items:center}
+    .bar label{color:var(--muted); font-size:12px; font-weight:800}
+    .track{height:8px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); overflow:hidden}
+    .fill{height:100%; width:0%; background:rgba(233,236,239,.65)}
+    .bar .val{font-weight:900; font-size:12px; color:var(--muted)}
+    .mini{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
+    .tag{display:inline-flex; align-items:center; padding:7px 10px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.03); font-weight:900; font-size:12px; color:var(--muted)}
+    .tag strong{color:var(--text); margin-right:6px}
+
+    /* Video blocks */
+    .video-wrap{border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.02); border-radius:var(--radius); overflow:hidden}
+    .video-wrap video{width:100%; height:100%; display:block; background:rgba(0,0,0,.25)}
+    .video-head{padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:10px; border-bottom:1px solid rgba(255,255,255,.08)}
+    .video-head b{font-weight:1000}
+    .video-head span{color:var(--muted); font-size:12px}
+
+    /* Feed grid inspired by Awwwards cards */
+    .grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
+    .card{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:var(--radius2);
+      overflow:hidden;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+    .card:hover{transform:translateY(-2px); border-color:rgba(255,255,255,.20); background:rgba(255,255,255,.04)}
+    .thumb{position:relative; aspect-ratio:16/9; background:rgba(255,255,255,.02); overflow:hidden}
+    .thumb video{width:100%; height:100%; object-fit:cover; display:block}
     .playbtn{
       position:absolute;
       inset:50% auto auto 50%;
       transform:translate(-50%,-50%);
-      width:54px; height:54px;
+      width:56px; height:56px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.20);
+      border:1px solid rgba(255,255,255,.22);
       background:rgba(0,0,0,.38);
       color:var(--text);
       font-size:20px;
-      font-weight:900;
+      font-weight:1000;
       display:flex; align-items:center; justify-content:center;
       cursor:pointer;
       backdrop-filter: blur(6px);
     }
-    .playbtn:active{transform:translate(-50%,-50%) scale(.98)}
     .playing .playbtn{display:none}
+    .card-body{padding:12px 12px 14px}
+    .title{font-weight:1000}
+    .sub{color:var(--muted); font-size:12px; margin-top:4px}
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+    .chip{padding:6px 9px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--muted); font-weight:900; font-size:11px}
 
-    .work{position:relative}
-    .work .thumb{position:relative}
-    .work .thumb video{background:rgba(255,255,255,.02)}
-    .work .playbtn{width:52px;height:52px;font-size:19px}
+    /* Services */
+    .cards2{display:grid; grid-template-columns: 1.2fr .8fr; gap:14px}
+    .list{display:grid; gap:12px}
+    .li{display:flex; gap:10px; align-items:flex-start; border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:18px; padding:14px}
+    .li .ic{width:10px;height:10px;border-radius:50%; background:rgba(233,236,239,.95); margin-top:6px; box-shadow:0 0 0 6px rgba(233,236,239,.10)}
+    .li b{font-weight:1000}
+    .li p{margin:6px 0 0; color:var(--muted); font-size:13px}
 
-    .best3{margin-top:18px}
-    .best3-head{display:flex; flex-direction:column; gap:6px; margin-bottom:10px}
-    .best3 h3{margin:0; font-size:16px}
-    .best3-hint{color:var(--muted); font-size:13px}
-    .best3-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:12px}
-    @media (max-width: 980px){.best3-grid{grid-template-columns:repeat(2, 1fr)}}
-    @media (max-width: 760px){.best3-grid{grid-template-columns:1fr}}
-    .best-card{border-radius:var(--radius2); border:1px solid var(--line); background:rgba(255,255,255,.03); overflow:hidden}
-    .best-thumb{position:relative; aspect-ratio:16/9; background:rgba(255,255,255,.02); overflow:hidden}
-    .best-thumb video{width:100%; height:100%; object-fit:cover; display:block}
-    .best-meta{padding:12px}
-    .best-title{font-weight:900; font-size:14px}
-    .best-tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+    /* Before/After */
+    .ba{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
+    .ba-item{border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:18px; padding:16px}
+    .ba-item h3{margin:0; font-size:14px; letter-spacing:.2px}
+    .ba-item p{margin:8px 0 0; color:var(--muted); font-size:13px}
+    .ph{height:130px; border-radius:16px; border:1px dashed rgba(255,255,255,.16); background:rgba(255,255,255,.02); margin-top:12px; display:flex; align-items:center; justify-content:center; color:var(--muted2); font-weight:900; font-size:12px}
 
-    /* Showreel height adapts to phone screens */
-    @media (max-width: 760px){
-      #showreel .video{max-height:70vh}
-      #showreel .video video{object-fit:cover}
-    }
+    /* Reviews */
+    .reviews{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px}
+    .review{border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:18px; padding:16px}
+    .review b{font-weight:1000}
+    .review p{margin:10px 0 0; color:var(--muted); font-size:13px}
+    .review .ph{height:110px}
 
-    /* ---------- Proof strip ---------- */
-    .proof{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-top:14px}
-    .proof-item{border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:14px; padding:12px}
-    .proof-k{color:var(--muted); font-size:12px}
-    .proof-v{font-weight:900; margin-top:2px; font-size:13px}
-    @media (max-width: 760px){ .proof{grid-template-columns:1fr} }
+    /* Contact */
+    .contact{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .panel{border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.03); border-radius:var(--radius); padding:18px}
+    .panel h3{margin:0; font-size:16px}
+    .panel p{margin:10px 0 0; color:var(--muted); font-size:13px}
+    .panel .row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
 
-    /* ---------- Video modal ---------- */
+    footer{padding:26px 0; border-top:1px solid rgba(255,255,255,.08); color:var(--muted); font-size:12px}
+    footer .container{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
+
+    /* Modal (desktop preview) */
     .vmodal{display:none}
     body.vmodal-open{overflow:hidden}
     body.vmodal-open .vmodal{
-      display:flex;
-      position:fixed;
-      inset:0;
-      z-index:120;
-      align-items:center;
-      justify-content:center;
-      padding:16px;
+      display:flex; position:fixed; inset:0; z-index:120;
+      align-items:center; justify-content:center; padding:16px;
     }
     .vmodal-backdrop{position:absolute; inset:0; background:rgba(0,0,0,.65); backdrop-filter: blur(8px)}
     .vmodal-inner{
-      position:relative;
-      width:min(980px, 100%);
-      border-radius:24px;
-      border:1px solid rgba(255,255,255,.14);
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      position:relative; width:min(980px, 100%);
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.16);
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
       box-shadow: var(--shadow);
       overflow:hidden;
     }
     .vmodal-top{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,.10)}
-    .vmodal-title{font-weight:900}
+    .vmodal-title{font-weight:1000}
     .vmodal-video{aspect-ratio:16/9; background:rgba(0,0,0,.25)}
     .vmodal-video video{width:100%; height:100%; object-fit:contain; display:block}
-    @media (max-width: 760px){ body.vmodal-open .vmodal{display:none} }
 
-    /* ---------- Floating CTA (mobile) ---------- */
+    /* Floating CTA (mobile) */
     .float-cta{display:none}
     @media (max-width: 760px){
       .float-cta{
         display:flex;
         position:fixed;
         left:14px; right:14px; bottom:14px;
-        z-index:90;
+        z-index:95;
         gap:10px;
         padding:10px;
         border-radius:22px;
@@ -353,90 +277,76 @@
         border:1px solid var(--line);
         background:rgba(255,255,255,.03);
         color:var(--text);
-        font-weight:900;
+        font-weight:1000;
         font-size:13px;
         letter-spacing:.2px;
       }
-      .float-btn.primary{
-        background:rgba(233,236,239,.14);
-        border-color:rgba(233,236,239,.26);
-      }
-      body{padding-bottom:92px}
+      .float-btn.primary{background:rgba(233,236,239,.14); border-color:rgba(233,236,239,.26)}
+      body{padding-bottom:96px}
     }
 
-    /* ---------- Mobile-only header + section styling ---------- */
-    @media (max-width: 760px){
-      .topbar-inner{padding:7px 0; gap:10px}
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2, 1fr)}
+      .reviews{grid-template-columns:repeat(2, 1fr)}
+      .cards2{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
       .nav{display:none}
       #menuBtn{display:inline-flex}
-      .dot{width:8px;height:8px; box-shadow:0 0 0 5px rgba(233,236,239,.10)}
-      .brand-title{font-size:14px}
-      .brand-sub{display:none}
-      .actions{gap:8px}
-      .btn{padding:8px 10px; font-size:12px}
-      .lang button{padding:7px 8px; font-size:11px}
-      #menuBtn{padding:8px 10px}
-      .actions a.btn{display:none} /* header CTA hidden (floating CTA exists) */
-
-      .topbar{transition: transform .18s ease}
-      body.scroll-down .topbar{transform: translateY(-110%)}
-      body.scroll-up .topbar{transform: translateY(0)}
-      body.nav-open .topbar{transform: translateY(0)}
-
-      section{padding:44px 0}
-      .hero{padding:46px 0 28px}
-      h1{font-size:34px}
-      .lead{font-size:15px}
-      .card-inner{padding:18px}
-      .panel{padding:14px}
-
-      section{background: rgba(255,255,255,.012)}
-      section:nth-of-type(even){background: rgba(255,255,255,.020)}
-      section .section-title{margin-bottom:14px}
-      section:nth-of-type(even) .section-title{border-bottom-style:dashed; border-bottom-color: rgba(255,255,255,.10)}
-      section .section-title h2{font-size:18px}
-      section:nth-of-type(3n) .section-title h2{letter-spacing:.4px}
-
-      .stats{grid-template-columns:1fr}
-      .works-grid{grid-template-columns:1fr; gap:12px}
-      .cards3{grid-template-columns:1fr}
-      .pricing{grid-template-columns:1fr}
-      .ba{grid-template-columns:1fr}
-      .reviews{grid-template-columns:1fr}
-      footer .container{flex-direction:column; align-items:flex-start}
+      .brand{min-width:unset}
     }
-
+    @media (max-width: 760px){
+      section{padding:52px 0}
+      section.hero{padding:46px 0 40px}
+      .topbar-inner{padding:8px 0}
+      .brand-sub{display:none}
+      h1{font-size:34px}
+      .hero-meta{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .reviews{grid-template-columns:1fr}
+      .ba{grid-template-columns:1fr}
+      .hint{display:none}
+      /* hide header CTA (floating CTA exists) */
+      .actions a.btn{display:none}
+    }
   </style>
 </head>
-<body class="lang-en">
+
+<body>
   <header class="topbar">
     <div class="container">
       <div class="topbar-inner">
         <div class="brand">
-          <div class="dot" aria-hidden="true"></div>
+          <span class="dot" aria-hidden="true"></span>
           <div>
             <div class="brand-title">Alex A</div>
-            <div class="brand-sub">Short-form • YouTube • Stream clips</div>
+            <div class="brand-sub" data-lang="en">Short-form • YouTube • Stream clips</div>
+            <div class="brand-sub" data-lang="ru">Shorts • YouTube • Нарезки стримов</div>
           </div>
         </div>
 
-        <nav class="nav" aria-label="Sections">
-          <a href="#showreel">Showreel</a>
-          <a href="#works">Works</a>
-          <a href="#services">Services</a>
-          <a href="#before-after">Before/After</a>
-          <a href="#reviews">Reviews</a>
-          <a href="#contact">Contact</a>
+        <nav class="nav" aria-label="Navigation">
+          <a href="#featured" data-lang="en">Featured</a>
+          <a href="#featured" data-lang="ru">Витрина</a>
+          <a href="#works" data-lang="en">Latest</a>
+          <a href="#works" data-lang="ru">Работы</a>
+          <a href="#services" data-lang="en">Services</a>
+          <a href="#services" data-lang="ru">Услуги</a>
+          <a href="#before-after" data-lang="en">Before/After</a>
+          <a href="#before-after" data-lang="ru">До/После</a>
+          <a href="#contact" data-lang="en">Contact</a>
+          <a href="#contact" data-lang="ru">Контакты</a>
         </nav>
 
         <div class="actions">
-          
-          <button class="btn small" id="menuBtn" type="button" aria-label="Menu">☰</button><div class="lang" role="group" aria-label="Language">
-            <button class="active" id="btnEN" type="button">EN</button>
-            <button id="btnRU" type="button">RU</button>
+          <div class="lang" aria-label="Language">
+            <button id="enBtn" class="active" type="button">EN</button>
+            <button id="ruBtn" type="button">RU</button>
           </div>
-          <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Telegram</a>
-          <a class="btn" href="mailto:alex.altukhov.s@gmail.com">Email</a>
+          <button class="btn small" id="menuBtn" type="button" aria-label="Menu">☰</button>
+          <a class="btn small" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Telegram</a>
+          <a class="btn small" href="mailto:alex.altukhov.s@gmail.com">Email</a>
         </div>
       </div>
     </div>
@@ -450,12 +360,18 @@
         <button class="btn small" id="menuClose" type="button" aria-label="Close">✕</button>
       </div>
       <div class="drawer-links">
-        <a href="#showreel" class="drawer-link">Showreel</a>
-        <a href="#works" class="drawer-link">Works</a>
-        <a href="#services" class="drawer-link">Services</a>
-        <a href="#before-after" class="drawer-link">Before/After</a>
-        <a href="#reviews" class="drawer-link">Reviews</a>
-        <a href="#contact" class="drawer-link">Contact</a>
+        <a href="#featured" class="drawer-link" data-lang="en">Featured</a>
+        <a href="#featured" class="drawer-link" data-lang="ru">Витрина</a>
+        <a href="#works" class="drawer-link" data-lang="en">Latest</a>
+        <a href="#works" class="drawer-link" data-lang="ru">Работы</a>
+        <a href="#services" class="drawer-link" data-lang="en">Services</a>
+        <a href="#services" class="drawer-link" data-lang="ru">Услуги</a>
+        <a href="#before-after" class="drawer-link" data-lang="en">Before/After</a>
+        <a href="#before-after" class="drawer-link" data-lang="ru">До/После</a>
+        <a href="#reviews" class="drawer-link" data-lang="en">Reviews</a>
+        <a href="#reviews" class="drawer-link" data-lang="ru">Отзывы</a>
+        <a href="#contact" class="drawer-link" data-lang="en">Contact</a>
+        <a href="#contact" class="drawer-link" data-lang="ru">Контакты</a>
       </div>
       <div class="drawer-cta">
         <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Telegram</a>
@@ -464,319 +380,409 @@
     </div>
   </div>
 
+  <main>
+    <section class="hero" id="featured">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-card">
+            <div class="hero-card-inner">
+              <div class="pill"><span class="dot" style="width:7px;height:7px;box-shadow:0 0 0 5px rgba(233,236,239,.10)"></span>
+                <span data-lang="en">Editor of the Day</span>
+                <span data-lang="ru">Монтажёр дня</span>
+                <span class="mono" style="color:var(--muted)">—</span>
+                <span class="mono" style="color:var(--muted)"><span id="today"></span></span>
+              </div>
 
-  <section class="hero" id="top">
-    <div class="container">
-      <div class="grid-hero">
-        <div class="card">
-          <div class="card-inner">
-            <div data-lang="en">
-              <h1>Short-form Video Editor<br/>for TikTok / Reels / Shorts</h1>
-              <p class="lead">Fast pacing, clean captions, strong hooks — built for retention. I also edit YouTube videos and stream highlights. AI-enhanced workflow for speed and quality.</p>
-              <div class="row-actions">
-                <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Get a test edit</a>
-                <a class="btn" href="#works">See works</a>
+              <h1 style="margin-top:14px">
+                <span data-lang="en">Short-form Video Editor<br/>for TikTok / Reels / Shorts</span>
+                <span data-lang="ru">Монтажёр коротких видео<br/>TikTok / Reels / Shorts</span>
+              </h1>
+
+              <p class="lead">
+                <span data-lang="en">Fast pacing, clean captions, strong hooks — built for retention. I also edit YouTube videos and stream highlights. AI‑enhanced workflow for speed and quality.</span>
+                <span data-lang="ru">Динамика, читаемые субтитры, мощные хуки — для удержания. Также монтирую YouTube и хайлайты со стримов. AI‑инструменты для скорости и качества.</span>
+              </p>
+
+              <div class="hero-actions">
+                <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">
+                  <span data-lang="en">Get a test edit</span>
+                  <span data-lang="ru">Тестовый монтаж</span>
+                </a>
+                <a class="btn" href="#works">
+                  <span data-lang="en">See works</span>
+                  <span data-lang="ru">Посмотреть работы</span>
+                </a>
+                <span class="pill" title="Tip"><span class="kbd">⌘</span><span class="kbd">K</span>
+                  <span data-lang="en">Quick view</span>
+                  <span data-lang="ru">Быстрый просмотр</span>
+                </span>
               </div>
-              <div class="chips" aria-label="Highlights">
-                <div class="chip"><b>Speed:</b> 1 min final ≈ 20–30 min edit</div>
-                <div class="chip"><b>Capacity:</b> up to 6 shorts/day</div>
-                <div class="chip"><b>Tools:</b> CapCut • Premiere • AE • DaVinci</div>
-              </div>
-              <div class="stats">
-                <div class="stat"><div class="k">Best for</div><div class="v">Hooks • Captions • Tempo</div></div>
-                <div class="stat"><div class="k">Deliverables</div><div class="v">Shorts + subtitles + cover</div></div>
+
+              <div class="hero-meta">
+                <div class="meta-box">
+                  <div class="meta-k" data-lang="en">Speed</div><div class="meta-k" data-lang="ru">Скорость</div>
+                  <div class="meta-v" data-lang="en">1 min final ≈ 20–30 min edit</div>
+                  <div class="meta-v" data-lang="ru">1 мин финала ≈ 20–30 мин монтажа</div>
+                </div>
+                <div class="meta-box">
+                  <div class="meta-k" data-lang="en">Capacity</div><div class="meta-k" data-lang="ru">Объём</div>
+                  <div class="meta-v" data-lang="en">Up to 6 shorts/day</div>
+                  <div class="meta-v" data-lang="ru">До 6 shorts/день</div>
+                </div>
+                <div class="meta-box">
+                  <div class="meta-k" data-lang="en">Tools</div><div class="meta-k" data-lang="ru">Инструменты</div>
+                  <div class="meta-v" data-lang="en">CapCut • Premiere • AE • DaVinci</div>
+                  <div class="meta-v" data-lang="ru">CapCut • Premiere • AE • DaVinci</div>
+                </div>
               </div>
             </div>
+          </div>
 
-            <div data-lang="ru">
-              <h1>Монтажёр коротких видео<br/>TikTok / Reels / Shorts</h1>
-              <p class="lead">Динамика, читаемые субтитры, мощные хуки — для удержания с первых секунд. Также монтирую YouTube и хайлайты со стримов. Использую AI-инструменты для скорости и качества.</p>
-              <div class="row-actions">
-                <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Сделать тестовый монтаж</a>
-                <a class="btn" href="#works">Посмотреть работы</a>
+          <aside class="score-panel" aria-label="Score">
+            <div class="score-top">
+              <div>
+                <div class="score-title" data-lang="en">Retention Score</div>
+                <div class="score-title" data-lang="ru">Оценка удержания</div>
+                <div class="score-sub" data-lang="en">A simple rubric clients care about.</div>
+                <div class="score-sub" data-lang="ru">Понятная шкала для клиентов.</div>
               </div>
-              <div class="chips" aria-label="Highlights">
-                <div class="chip"><b>Скорость:</b> 1 мин финала ≈ 20–30 мин монтажа</div>
-                <div class="chip"><b>Объём:</b> до 6 shorts/день</div>
-                <div class="chip"><b>Инструменты:</b> CapCut • Premiere • AE • DaVinci</div>
+              <div class="score-big mono">9.<span style="opacity:.7">1</span></div>
+            </div>
+            <div class="score-bars">
+              <div class="bar">
+                <label data-lang="en">Hook</label><label data-lang="ru">Хук</label>
+                <div class="track"><div class="fill" style="width:92%"></div></div>
+                <div class="val mono">9.2</div>
               </div>
-              <div class="stats">
-                <div class="stat"><div class="k">Сильное</div><div class="v">Хуки • Сабы • Темп</div></div>
-                <div class="stat"><div class="k">Выдаю</div><div class="v">Шортсы + субтитры + обложка</div></div>
+              <div class="bar">
+                <label data-lang="en">Captions</label><label data-lang="ru">Сабы</label>
+                <div class="track"><div class="fill" style="width:88%"></div></div>
+                <div class="val mono">8.8</div>
+              </div>
+              <div class="bar">
+                <label data-lang="en">Pacing</label><label data-lang="ru">Темп</label>
+                <div class="track"><div class="fill" style="width:93%"></div></div>
+                <div class="val mono">9.3</div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="aside">
-          <div class="panel">
-            <h3 data-lang="en">Availability</h3>
-            <h3 data-lang="ru">Доступность</h3>
-            <p data-lang="en">Open for clients and full-time roles. Typical turnaround: same day / next day (depending on volume).</p>
-            <p data-lang="ru">Открыт для клиентов и найма. Обычно делаю в тот же день / на следующий (зависит от объёма).</p>
-          </div>
-          <div class="panel">
-            <h3 data-lang="en">Pricing</h3>
-            <h3 data-lang="ru">Цены</h3>
-            <p data-lang="en"><b>2,000 ₽</b> per premium short (client). Full-time: <b>80,000 ₽</b>/month.</p>
-            <p data-lang="ru"><b>2 000 ₽</b> за хороший short (клиент). Найм: <b>80 000 ₽</b>/мес.</p>
-          </div>
-          <div class="panel">
-            <h3 data-lang="en">What I need from you</h3>
-            <h3 data-lang="ru">Что нужно от вас</h3>
-            <p data-lang="en">Reference clips + brief + deadline. I can propose hook variants and caption style.</p>
-            <p data-lang="ru">Референсы + ТЗ + дедлайн. Могу предложить варианты хука и стиля субтитров.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="showreel">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-lang="en">Showreel (temporary)</h2>
-        <h2 data-lang="ru">Шоурил (временно)</h2>
-        <div class="hint" data-lang="en">For now, your first clip is here. When you have a 30s reel, replace the video file.</div>
-        <div class="hint" data-lang="ru">Пока тут первый клип. Когда будет 30-сек шоурил — просто заменишь файл.</div>
-      </div>
-
-      <div class="video" aria-label="Showreel video">
-        <video src="assets/videos/koktl.mp4" controls playsinline preload="metadata"></video>
-        <div class="overlay">
-          <div class="badge" data-lang="en">Showreel placeholder</div>
-          <div class="badge" data-lang="ru">Заглушка шоурила</div>
+            <div class="mini">
+              <span class="tag"><strong data-lang="en">Best for:</strong><strong data-lang="ru">Сильное:</strong> Hooks • Captions • Tempo</span>
+              <span class="tag"><strong data-lang="en">Deliver:</strong><strong data-lang="ru">Выдаю:</strong> Shorts + subtitles + cover</span>
+              <span class="tag"><strong data-lang="en">Turnaround:</strong><strong data-lang="ru">Срок:</strong> same day / next day</span>
+            </div>
+            <div class="sep" style="margin:14px 0"></div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap">
+              <span class="pill"><span class="mono">2,000 ₽</span> <span data-lang="en">/ premium short</span><span data-lang="ru">/ premium short</span></span>
+              <span class="pill"><span class="mono">80,000 ₽</span> <span data-lang="en">/ month (full‑time)</span><span data-lang="ru">/ месяц (найм)</span></span>
+            </div>
+          </aside>
         </div>
       </div>
-    </div>
-      <!-- Best 3 clips (mobile-first) -->
-      <div class="best3" aria-label="Best clips">
-        <div class="best3-head">
-          <h3 data-lang="en">Best clips</h3>
-          <h3 data-lang="ru">Лучшие клипы</h3>
-          <div class="best3-hint" data-lang="en">Tap to play. Built for retention: hook → pacing → captions.</div>
-          <div class="best3-hint" data-lang="ru">Нажми чтобы проиграть. Удержание: хук → темп → сабы.</div>
+    </section>
+
+    <section id="showreel">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-lang="en">Featured Reel</h2><h2 data-lang="ru">Шоурил</h2>
+          <div class="hint" data-lang="en">Replace this with your 30s showreel later — for now it uses a sample clip.</div>
+          <div class="hint" data-lang="ru">Позже заменишь на 30‑сек шоурил — сейчас стоит пример.</div>
+        </div>
+        <div class="video-wrap">
+          <div class="video-head">
+            <b>Showreel</b>
+            <span data-lang="en">Tap play • fullscreen available</span>
+            <span data-lang="ru">Нажми play • есть полный экран</span>
+          </div>
+          <video src="assets/videos/koktl.mp4" controls playsinline preload="metadata"></video>
+        </div>
+      </div>
+    </section>
+
+    <section id="best">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-lang="en">Best 3 Clips</h2><h2 data-lang="ru">Топ 3 клипа</h2>
+          <div class="hint" data-lang="en">The strongest proof goes first. Tap to play directly in the card.</div>
+          <div class="hint" data-lang="ru">Самые сильные — первыми. Тап и просмотр прямо в карточке.</div>
         </div>
 
-        <div class="best3-grid">
-          <div class="best-card">
-            <div class="best-thumb">
-              <video class="best-video" src="assets/videos/koktl.mp4" playsinline preload="metadata" muted></video>
+        <div class="grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="card work" data-src="assets/videos/koktl.mp4">
+            <div class="thumb">
+              <video src="assets/videos/koktl.mp4" playsinline muted preload="metadata"></video>
               <button class="playbtn" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="best-meta">
-              <div class="best-title">koktl</div>
-              <div class="best-tags"><span class="tag">Hook</span><span class="tag">Captions</span><span class="tag">Pace</span></div>
+            <div class="card-body">
+              <div class="title">koktl</div>
+              <div class="sub" data-lang="en">Hook + captions + pacing</div>
+              <div class="sub" data-lang="ru">Хук + сабы + темп</div>
+              <div class="chips"><span class="chip">Hook</span><span class="chip">Captions</span><span class="chip">Pace</span></div>
             </div>
           </div>
 
-          <div class="best-card">
-            <div class="best-thumb">
-              <video class="best-video" src="assets/videos/inst4.mp4" playsinline preload="metadata" muted></video>
+          <div class="card work" data-src="assets/videos/inst4.mp4">
+            <div class="thumb">
+              <video src="assets/videos/inst4.mp4" playsinline muted preload="metadata"></video>
               <button class="playbtn" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="best-meta">
-              <div class="best-title">inst4</div>
-              <div class="best-tags"><span class="tag">Subtitles</span><span class="tag">Rhythm</span></div>
+            <div class="card-body">
+              <div class="title">inst4</div>
+              <div class="sub" data-lang="en">Subtitles + rhythm</div>
+              <div class="sub" data-lang="ru">Сабы + ритм</div>
+              <div class="chips"><span class="chip">Subtitles</span><span class="chip">Rhythm</span></div>
             </div>
           </div>
 
-          <div class="best-card">
-            <div class="best-thumb">
-              <video class="best-video" src="assets/videos/diz.mp4" playsinline preload="metadata" muted></video>
+          <div class="card work" data-src="assets/videos/diz.mp4">
+            <div class="thumb">
+              <video src="assets/videos/diz.mp4" playsinline muted preload="metadata"></video>
               <button class="playbtn" type="button" aria-label="Play">▶</button>
             </div>
-            <div class="best-meta">
-              <div class="best-title">diz</div>
-              <div class="best-tags"><span class="tag">SFX</span><span class="tag">Timing</span></div>
+            <div class="card-body">
+              <div class="title">diz</div>
+              <div class="sub" data-lang="en">SFX + timing</div>
+              <div class="sub" data-lang="ru">SFX + тайминг</div>
+              <div class="chips"><span class="chip">SFX</span><span class="chip">Timing</span></div>
             </div>
           </div>
         </div>
-
-        <div class="best3-note panel" style="margin-top:12px">
-          <p data-lang="en"><b>Mobile tip:</b> If playback starts muted, tap the speaker in the player controls.</p>
-          <p data-lang="ru"><b>Совет:</b> Если звук не слышно — включи его в контролах плеера.</p>
-        </div>
       </div>
+    </section>
 
-  </section>
-
-  <section id="works">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-lang="en">Works</h2>
-        <h2 data-lang="ru">Работы</h2>
-        <div class="hint" data-lang="en">Tap to play (mobile) • Click to preview (desktop).</div>
-        <div class="hint" data-lang="ru">На телефоне — тап и проигрывание • На ПК — клик для предпросмотра.</div>
-      </div>
-
-      <div class="works-grid">
-        <div class="work" data-src="assets/videos/koktl.mp4">
-          <div class="thumb"><video src="assets/videos/koktl.mp4" muted playsinline preload="metadata"></video></div>
-          <div class="meta"><div class="title">koktl</div><div class="tags"><span class="tag">Hook</span><span class="tag">Captions</span><span class="tag">Pace</span></div></div>
+    <section id="works">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-lang="en">Latest Works</h2><h2 data-lang="ru">Последние работы</h2>
+          <div class="hint" data-lang="en">Mobile: tap to play. Desktop: click for modal preview.</div>
+          <div class="hint" data-lang="ru">Телефон: тап и просмотр. ПК: клик — предпросмотр в окне.</div>
         </div>
 
-        <div class="work" data-src="assets/videos/inst4.mp4">
-          <div class="thumb"><video src="assets/videos/inst4.mp4" muted playsinline preload="metadata"></video></div>
-          <div class="meta"><div class="title">inst4</div><div class="tags"><span class="tag">Subtitles</span><span class="tag">Rhythm</span></div></div>
-        </div>
-
-        <div class="work" data-src="assets/videos/diz.mp4">
-          <div class="thumb"><video src="assets/videos/diz.mp4" muted playsinline preload="metadata"></video></div>
-          <div class="meta"><div class="title">diz</div><div class="tags"><span class="tag">SFX</span><span class="tag">Timing</span></div></div>
-        </div>
-
-        <div class="work" data-src="assets/videos/norm.mp4">
-          <div class="thumb"><video src="assets/videos/norm.mp4" muted playsinline preload="metadata"></video></div>
-          <div class="meta"><div class="title">norm</div><div class="tags"><span class="tag">Tempo</span><span class="tag">Flow</span></div></div>
-        </div>
-
-        <div class="work" data-src="assets/videos/LOVE.mp4">
-          <div class="thumb"><video src="assets/videos/LOVE.mp4" muted playsinline preload="metadata"></video></div>
-          <div class="meta"><div class="title">LOVE</div><div class="tags"><span class="tag">Highlights</span><span class="tag">Cuts</span></div></div>
-        </div>
-
-        <div class="work" data-src="assets/videos/pizza_tt.mp4">
-          <div class="thumb"><video src="assets/videos/pizza_tt.mp4" muted playsinline preload="metadata"></video></div>
-          <div class="meta"><div class="title">pizza_tt</div><div class="tags"><span class="tag">Audio</span><span class="tag">Clean</span></div></div>
-        </div>
-
-        <a class="work" href="#" onclick="return false;">
-          <div class="thumb" style="display:flex;align-items:center;justify-content:center;color:var(--muted)">Add video #7</div>
-          <div class="meta"><div class="title">Work #7</div><div class="tags"><span class="tag">Add tags</span></div></div>
-        </a>
-        <a class="work" href="#" onclick="return false;">
-          <div class="thumb" style="display:flex;align-items:center;justify-content:center;color:var(--muted)">Add video #8</div>
-          <div class="meta"><div class="title">Work #8</div><div class="tags"><span class="tag">Add tags</span></div></div>
-        </a>
-        <a class="work" href="#" onclick="return false;">
-          <div class="thumb" style="display:flex;align-items:center;justify-content:center;color:var(--muted)">Add video #9</div>
-          <div class="meta"><div class="title">Work #9</div><div class="tags"><span class="tag">Add tags</span></div></div>
-        </a>
-        <a class="work" href="#" onclick="return false;">
-          <div class="thumb" style="display:flex;align-items:center;justify-content:center;color:var(--muted)">Add video #10</div>
-          <div class="meta"><div class="title">Work #10</div><div class="tags"><span class="tag">Add tags</span></div></div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="services">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-lang="en">Services</h2>
-        <h2 data-lang="ru">Услуги</h2>
-        <div class="hint" data-lang="en">Shorts that feel fast, clean, and watchable.</div>
-        <div class="hint" data-lang="ru">Шортсы, которые смотрятся быстро, чисто и до конца.</div>
-      </div>
-
-      <div class="cards3">
-        <div class="svc">
-          <h3 data-lang="en">Short-form editing</h3>
-          <h3 data-lang="ru">Монтаж коротких видео</h3>
-          <p data-lang="en">TikTok / Reels / Shorts built around hooks and retention.</p>
-          <p data-lang="ru">TikTok / Reels / Shorts с упором на хук и удержание.</p>
-        </div>
-
-        <div class="svc">
-          <h3 data-lang="en">Captions & retention</h3>
-          <h3 data-lang="ru">Субтитры и удержание</h3>
-          <p data-lang="en">Readable subtitles, emphasis, structure — made to keep viewers.</p>
-          <p data-lang="ru">Читаемые субтитры, акценты, структура — чтобы досматривали.</p>
-        </div>
-
-        <div class="svc">
-          <h3 data-lang="en">AI-enhanced workflow</h3>
-          <h3 data-lang="ru">AI-технологии</h3>
-          <p data-lang="en">Speed + quality: cleanup, enhancement, automation.</p>
-          <p data-lang="ru">Скорость + качество: чистка, улучшение, автоматизация.</p>
-        </div>
-      </div>
-
-      <div style="margin-top:14px" class="pricing">
-        <div class="pricebox">
-          <div class="tabs" aria-label="Pricing tabs">
-            <button class="tab active" id="tabClient" type="button">Client</button>
-            <button class="tab" id="tabHiring" type="button">Hiring</button>
+        <div class="grid">
+          <div class="card work" data-src="assets/videos/koktl.mp4">
+            <div class="thumb">
+              <video src="assets/videos/koktl.mp4" playsinline muted preload="metadata"></video>
+              <button class="playbtn" type="button" aria-label="Play">▶</button>
+            </div>
+            <div class="card-body">
+              <div class="title">koktl</div>
+              <div class="sub">Hook • Captions • Pace</div>
+              <div class="chips"><span class="chip">Retention</span><span class="chip">Cuts</span><span class="chip">Captions</span></div>
+            </div>
           </div>
-          <div style="margin-top:14px" id="pricingClient">
-            <div class="big" data-lang="en">2,000 ₽ per premium short</div>
-            <div class="big" data-lang="ru">2 000 ₽ за хороший short</div>
-            <div class="sub" data-lang="en">Final price depends on complexity & volume.</div>
-            <div class="sub" data-lang="ru">Цена зависит от сложности и объёма.</div>
+
+          <div class="card work" data-src="assets/videos/inst4.mp4">
+            <div class="thumb">
+              <video src="assets/videos/inst4.mp4" playsinline muted preload="metadata"></video>
+              <button class="playbtn" type="button" aria-label="Play">▶</button>
+            </div>
+            <div class="card-body">
+              <div class="title">inst4</div>
+              <div class="sub">Subtitles • Rhythm</div>
+              <div class="chips"><span class="chip">Subtitles</span><span class="chip">Timing</span></div>
+            </div>
           </div>
-          <div style="margin-top:14px; display:none" id="pricingHiring">
-            <div class="big" data-lang="en">Full-time: 80,000 ₽ / month</div>
-            <div class="big" data-lang="ru">Найм: 80 000 ₽ / месяц</div>
-            <div class="sub" data-lang="en">Open to roles (short-form + YouTube).</div>
-            <div class="sub" data-lang="ru">Открыт к ролям (shorts + YouTube).</div>
+
+          <div class="card work" data-src="assets/videos/diz.mp4">
+            <div class="thumb">
+              <video src="assets/videos/diz.mp4" playsinline muted preload="metadata"></video>
+              <button class="playbtn" type="button" aria-label="Play">▶</button>
+            </div>
+            <div class="card-body">
+              <div class="title">diz</div>
+              <div class="sub">SFX • Timing</div>
+              <div class="chips"><span class="chip">SFX</span><span class="chip">Pace</span></div>
+            </div>
+          </div>
+
+          <div class="card work" data-src="assets/videos/norm.mp4">
+            <div class="thumb">
+              <video src="assets/videos/norm.mp4" playsinline muted preload="metadata"></video>
+              <button class="playbtn" type="button" aria-label="Play">▶</button>
+            </div>
+            <div class="card-body">
+              <div class="title">norm</div>
+              <div class="sub">Tempo • Flow</div>
+              <div class="chips"><span class="chip">Flow</span><span class="chip">Cuts</span></div>
+            </div>
+          </div>
+
+          <div class="card work" data-src="assets/videos/LOVE.mp4">
+            <div class="thumb">
+              <video src="assets/videos/LOVE.mp4" playsinline muted preload="metadata"></video>
+              <button class="playbtn" type="button" aria-label="Play">▶</button>
+            </div>
+            <div class="card-body">
+              <div class="title">LOVE</div>
+              <div class="sub">Highlights • Cuts</div>
+              <div class="chips"><span class="chip">Highlights</span><span class="chip">Punch</span></div>
+            </div>
+          </div>
+
+          <div class="card work" data-src="assets/videos/pizza_tt.mp4">
+            <div class="thumb">
+              <video src="assets/videos/pizza_tt.mp4" playsinline muted preload="metadata"></video>
+              <button class="playbtn" type="button" aria-label="Play">▶</button>
+            </div>
+            <div class="card-body">
+              <div class="title">pizza_tt</div>
+              <div class="sub">Audio • Clean</div>
+              <div class="chips"><span class="chip">Audio</span><span class="chip">Captions</span></div>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="pricebox">
-          <div class="big" data-lang="en">Contact</div>
-          <div class="big" data-lang="ru">Контакты</div>
-          <div class="note"><a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Telegram</a> <a class="btn" href="mailto:alex.altukhov.s@gmail.com">Email</a></div>
+    <section id="services">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-lang="en">Services</h2><h2 data-lang="ru">Услуги</h2>
+          <div class="hint" data-lang="en">Simple, predictable packages. Fast delivery.</div>
+          <div class="hint" data-lang="ru">Простые пакеты. Быстрая выдача.</div>
+        </div>
+
+        <div class="cards2">
+          <div class="list">
+            <div class="li">
+              <div class="ic"></div>
+              <div>
+                <b data-lang="en">Short-form editing</b><b data-lang="ru">Монтаж коротких видео</b>
+                <p data-lang="en">TikTok / Reels / Shorts built around hooks and retention.</p>
+                <p data-lang="ru">TikTok / Reels / Shorts с упором на хук и удержание.</p>
+              </div>
+            </div>
+            <div class="li">
+              <div class="ic"></div>
+              <div>
+                <b data-lang="en">Captions & retention</b><b data-lang="ru">Субтитры и удержание</b>
+                <p data-lang="en">Readable subtitles, emphasis, structure — made to keep viewers.</p>
+                <p data-lang="ru">Читаемые субтитры, акценты, структура — чтобы досматривали.</p>
+              </div>
+            </div>
+            <div class="li">
+              <div class="ic"></div>
+              <div>
+                <b data-lang="en">AI‑enhanced workflow</b><b data-lang="ru">AI‑технологии</b>
+                <p data-lang="en">Cleanup, enhancement, automation — speed + quality.</p>
+                <p data-lang="ru">Чистка, улучшение, автоматизация — скорость + качество.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3 data-lang="en">Pricing</h3><h3 data-lang="ru">Цены</h3>
+            <p><span class="mono" style="font-weight:1000">2,000 ₽</span> <span data-lang="en">per premium short (client).</span><span data-lang="ru">за premium short (клиент).</span></p>
+            <p><span class="mono" style="font-weight:1000">80,000 ₽</span> <span data-lang="en">/ month (full‑time).</span><span data-lang="ru">/ месяц (найм).</span></p>
+            <div class="sep" style="margin:14px 0"></div>
+            <p data-lang="en"><b>What I need:</b> reference clips + brief + deadline. I can propose hook variants and caption style.</p>
+            <p data-lang="ru"><b>Что нужно:</b> референсы + ТЗ + дедлайн. Могу предложить варианты хука и стиля сабов.</p>
+            <div class="row">
+              <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">
+                <span data-lang="en">Message on Telegram</span><span data-lang="ru">Написать в Telegram</span>
+              </a>
+              <a class="btn" href="#works"><span data-lang="en">See works</span><span data-lang="ru">Работы</span></a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="before-after">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-lang="en">Before / After</h2>
-        <h2 data-lang="ru">До / После</h2>
-        <div class="hint" data-lang="en">Replace placeholders with your “raw vs edited” examples.</div>
-        <div class="hint" data-lang="ru">Заменишь заглушки на примеры “сырьё vs финал”.</div>
-      </div>
-      <div class="ba">
-        <div class="ba-item"><div class="row"><div class="mini">BEFORE (video)</div><div class="mini">AFTER (video)</div></div></div>
-        <div class="ba-item"><div class="row"><div class="mini">BEFORE (video)</div><div class="mini">AFTER (video)</div></div></div>
-        <div class="ba-item"><div class="row"><div class="mini">BEFORE (video)</div><div class="mini">AFTER (video)</div></div></div>
-      </div>
-    </div>
-  </section>
+    <section id="before-after">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-lang="en">Before / After</h2><h2 data-lang="ru">До / После</h2>
+          <div class="hint" data-lang="en">Drop your pairs here later (raw → final). This section increases trust a lot.</div>
+          <div class="hint" data-lang="ru">Позже добавь пары (сырьё → финал). Этот блок сильно повышает доверие.</div>
+        </div>
 
-  <section id="reviews">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-lang="en">Reviews</h2>
-        <h2 data-lang="ru">Отзывы</h2>
+        <div class="ba">
+          <div class="ba-item">
+            <h3 data-lang="en">Pair #1</h3><h3 data-lang="ru">Пара #1</h3>
+            <p data-lang="en">Placeholders — add “before” and “after” videos/screenshots.</p>
+            <p data-lang="ru">Заглушки — добавишь видео/скрины до и после.</p>
+            <div class="ph" data-lang="en">Drop media here later</div>
+            <div class="ph" data-lang="ru">Позже вставишь медиа</div>
+          </div>
+          <div class="ba-item">
+            <h3 data-lang="en">Pair #2</h3><h3 data-lang="ru">Пара #2</h3>
+            <p data-lang="en">Keep it simple: raw clip + finished version.</p>
+            <p data-lang="ru">Просто: сырой клип + итоговая версия.</p>
+            <div class="ph" data-lang="en">Drop media here later</div>
+            <div class="ph" data-lang="ru">Позже вставишь медиа</div>
+          </div>
+        </div>
       </div>
-      <div class="reviews">
-        <div class="review"><div class="img">Screenshot #1</div></div>
-        <div class="review"><div class="img">Screenshot #2</div></div>
-        <div class="review"><div class="img">Screenshot #3</div></div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact">
-    <div class="container">
-      <div class="section-title">
-        <h2 data-lang="en">Contact</h2>
-        <h2 data-lang="ru">Контакты</h2>
-      </div>
-      <div class="card"><div class="card-inner">
-        <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Telegram</a>
-        <a class="btn" href="mailto:alex.altukhov.s@gmail.com">Email</a>
-      </div></div>
-    </div>
-  </section>
+    <section id="reviews">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-lang="en">Reviews</h2><h2 data-lang="ru">Отзывы</h2>
+          <div class="hint" data-lang="en">Add screenshots of feedback — it converts best.</div>
+          <div class="hint" data-lang="ru">Добавь скрины отзывов — лучше всего конвертит.</div>
+        </div>
 
-  <footer>
-    <div class="container" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between">
-      <div>© <span id="year"></span> Alex A</div>
-      <div style="display:flex; gap:10px; align-items:center">
-        <a href="#top">↑ Top</a>
+        <div class="reviews">
+          <div class="review">
+            <b data-lang="en">Client #1</b><b data-lang="ru">Клиент #1</b>
+            <p data-lang="en">Place your testimonial screenshot here.</p>
+            <p data-lang="ru">Сюда вставишь скрин отзыва.</p>
+            <div class="ph" data-lang="en">Screenshot placeholder</div>
+            <div class="ph" data-lang="ru">Заглушка скрина</div>
+          </div>
+          <div class="review">
+            <b data-lang="en">Client #2</b><b data-lang="ru">Клиент #2</b>
+            <p data-lang="en">Keep it short: what improved + why they recommend you.</p>
+            <p data-lang="ru">Коротко: что улучшилось + почему рекомендуют.</p>
+            <div class="ph" data-lang="en">Screenshot placeholder</div>
+            <div class="ph" data-lang="ru">Заглушка скрина</div>
+          </div>
+          <div class="review">
+            <b data-lang="en">Client #3</b><b data-lang="ru">Клиент #3</b>
+            <p data-lang="en">Optional: add a metric screenshot (views, retention).</p>
+            <p data-lang="ru">Можно: скрин метрик (просмотры, удержание).</p>
+            <div class="ph" data-lang="en">Screenshot placeholder</div>
+            <div class="ph" data-lang="ru">Заглушка скрина</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </footer>
+    </section>
 
-  
-  
+    <section id="contact">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-lang="en">Contact</h2><h2 data-lang="ru">Контакты</h2>
+          <div class="hint" data-lang="en">Fastest way: Telegram. I can start with a test edit.</div>
+          <div class="hint" data-lang="ru">Самое быстрое: Telegram. Можно начать с тестового монтажа.</div>
+        </div>
+
+        <div class="contact">
+          <div class="panel">
+            <h3 data-lang="en">Let’s make your shorts watchable</h3>
+            <h3 data-lang="ru">Сделаем шортсы досматриваемыми</h3>
+            <p data-lang="en">Send a clip + references + deadline. I’ll propose hook options and subtitle style.</p>
+            <p data-lang="ru">Пришли клип + референсы + дедлайн. Предложу варианты хука и стиль сабов.</p>
+            <div class="row">
+              <a class="btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">Telegram</a>
+              <a class="btn" href="mailto:alex.altukhov.s@gmail.com">alex.altukhov.s@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3 data-lang="en">Availability</h3><h3 data-lang="ru">Доступность</h3>
+            <p data-lang="en"><b>Status:</b> open for clients and full‑time roles.</p>
+            <p data-lang="ru"><b>Статус:</b> открыт для клиентов и найма.</p>
+            <p data-lang="en"><b>Turnaround:</b> same day / next day (depends on volume).</p>
+            <p data-lang="ru"><b>Срок:</b> сегодня / завтра (зависит от объёма).</p>
+            <div class="sep" style="margin:14px 0"></div>
+            <p data-lang="en">Tip: add screenshots of results here later (views, retention, CTR).</p>
+            <p data-lang="ru">Совет: позже добавь скрины результатов (просмотры, удержание, CTR).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <!-- Video modal (desktop preview) -->
   <div class="vmodal" id="vModal" aria-hidden="true">
     <div class="vmodal-backdrop" id="vModalBackdrop"></div>
@@ -794,133 +800,61 @@
   <!-- Mobile floating CTA -->
   <div class="float-cta" id="floatCta" aria-label="Quick contact">
     <a class="float-btn primary" href="https://t.me/tebyaebetdm" target="_blank" rel="noreferrer">
-      <span data-lang="en">Get a test edit</span>
-      <span data-lang="ru">Тестовый монтаж</span>
+      <span data-lang="en">Get a test edit</span><span data-lang="ru">Тестовый монтаж</span>
     </a>
     <a class="float-btn" href="#contact">
-      <span data-lang="en">Hire me</span>
-      <span data-lang="ru">Нанять</span>
+      <span data-lang="en">Hire me</span><span data-lang="ru">Нанять</span>
     </a>
   </div>
 
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+  <footer>
+    <div class="container">
+      <div>© <span id="year"></span> Alex A</div>
+      <div class="mono">GitHub Pages • Dark premium • Minimal</div>
+    </div>
+  </footer>
 
-    const btnEN = document.getElementById('btnEN');
-    const btnRU = document.getElementById('btnRU');
+  <script>
+    const d = new Date();
+    document.getElementById('year').textContent = d.getFullYear();
+    document.getElementById('today').textContent = d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+
+    // Language toggle
+    const enBtn = document.getElementById('enBtn');
+    const ruBtn = document.getElementById('ruBtn');
     function setLang(lang){
-      document.body.classList.toggle('lang-en', lang === 'en');
-      document.body.classList.toggle('lang-ru', lang === 'ru');
-      btnEN.classList.toggle('active', lang === 'en');
-      btnRU.classList.toggle('active', lang === 'ru');
+      document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = (el.getAttribute('data-lang') === lang) ? '' : 'none';
+      });
+      enBtn.classList.toggle('active', lang === 'en');
+      ruBtn.classList.toggle('active', lang === 'ru');
       localStorage.setItem('lang', lang);
     }
-    btnEN.addEventListener('click', () => setLang('en'));
-    btnRU.addEventListener('click', () => setLang('ru'));
-    const saved = localStorage.getItem('lang');
-    if(saved === 'ru' || saved === 'en') setLang(saved);
+    const saved = localStorage.getItem('lang') || 'en';
+    setLang(saved);
+    enBtn.addEventListener('click', ()=>setLang('en'));
+    ruBtn.addEventListener('click', ()=>setLang('ru'));
 
-    const tabClient = document.getElementById('tabClient');
-    const tabHiring = document.getElementById('tabHiring');
-    const pricingClient = document.getElementById('pricingClient');
-    const pricingHiring = document.getElementById('pricingHiring');
-    function setPricing(mode){
-      tabClient.classList.toggle('active', mode === 'client');
-      tabHiring.classList.toggle('active', mode === 'hiring');
-      pricingClient.style.display = mode === 'client' ? 'block' : 'none';
-      pricingHiring.style.display = mode === 'hiring' ? 'block' : 'none';
-    }
-    tabClient.addEventListener('click', () => setPricing('client'));
-    tabHiring.addEventListener('click', () => setPricing('hiring'));
-
-    document.querySelectorAll('.work video').forEach(v => {
-      v.addEventListener('mouseenter', () => { try { v.play(); } catch(e){} });
-      v.addEventListener('mouseleave', () => { try { v.pause(); v.currentTime = 0; } catch(e){} });
-    });
-  
-    // Mobile menu
+    // Mobile drawer
     const menuBtn = document.getElementById('menuBtn');
     const menuClose = document.getElementById('menuClose');
     const drawer = document.getElementById('drawer');
-    function openMenu(){
-      document.body.classList.add('nav-open');
-      drawer?.setAttribute('aria-hidden','false');
-    }
-    function closeMenu(){
-      document.body.classList.remove('nav-open');
-      drawer?.setAttribute('aria-hidden','true');
-    }
+    function openMenu(){ document.body.classList.add('nav-open'); drawer?.setAttribute('aria-hidden','false'); }
+    function closeMenu(){ document.body.classList.remove('nav-open'); drawer?.setAttribute('aria-hidden','true'); }
     menuBtn?.addEventListener('click', openMenu);
     menuClose?.addEventListener('click', closeMenu);
     drawer?.addEventListener('click', (e)=>{ if(e.target === drawer) closeMenu(); });
     document.querySelectorAll('.drawer-link').forEach(a=>a.addEventListener('click', closeMenu));
 
-    // Inline video playback (mobile-friendly)
-    function pauseAll(except){
-      document.querySelectorAll('video').forEach(v => {
-        if(v !== except){
-          try{ v.pause(); v.currentTime = 0; }catch(e){}
-          v.closest('.playing')?.classList.remove('playing');
-          if(v.classList.contains('best-video')) v.muted = true;
-          if(v.closest('.work')) v.muted = true;
-        }
-      });
-    }
-    function bindCardPlayback(card, videoSel){
-      const v = card.querySelector(videoSel);
-      const btn = card.querySelector('.playbtn');
-      if(!v || !btn) return;
-
-      v.muted = true;
-      v.playsInline = true;
-
-      function play(){
-        pauseAll(v);
-        card.classList.add('playing');
-        v.controls = true;
-        v.play().catch(()=>{});
-      }
-      btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); play(); });
-      card.addEventListener('click', ()=>{ if(v.paused) play(); });
-      v.addEventListener('pause', ()=>{ card.classList.remove('playing'); });
-      v.addEventListener('ended', ()=>{ card.classList.remove('playing'); });
-    }
-    document.querySelectorAll('.work[data-src]').forEach(card => bindCardPlayback(card, 'video'));
-    document.querySelectorAll('.best-card').forEach(card => bindCardPlayback(card, 'video'));
-
-    // Floating CTA hide/show (avoid covering contact section)
-    const floatCta = document.getElementById('floatCta');
-    const contactEl = document.getElementById('contact');
-    function updateFloatCta(){
-      if(!floatCta || !contactEl) return;
-      const r = contactEl.getBoundingClientRect();
-      const nearContact = r.top < window.innerHeight * 0.65;
-      floatCta.style.opacity = nearContact ? '0' : '1';
-      floatCta.style.pointerEvents = nearContact ? 'none' : 'auto';
-    }
-    window.addEventListener('scroll', updateFloatCta, {passive:true});
-    window.addEventListener('resize', updateFloatCta);
-    updateFloatCta();
-
-    // Hide CTA when mobile drawer is open
-    const obsBody = new MutationObserver(()=>{
-      if(!floatCta) return;
-      const open = document.body.classList.contains('nav-open');
-      floatCta.style.transform = open ? 'translateY(120%)' : 'translateY(0)';
-    });
-    obsBody.observe(document.body, {attributes:true, attributeFilter:['class']});
-
-    // Mobile header auto-hide on scroll (only on small screens)
+    // Scroll hide header
     (function(){
-      const mq = window.matchMedia && window.matchMedia('(max-width: 760px)');
-      if(!mq || !mq.matches) return;
-
       let lastY = window.scrollY || 0;
       let ticking = false;
       function onScroll(){
         if(ticking) return;
         ticking = true;
-        window.requestAnimationFrame(()=>{
+        requestAnimationFrame(()=>{
           const y = window.scrollY || 0;
           const dy = y - lastY;
           if(Math.abs(dy) > 8){
@@ -940,7 +874,52 @@
       window.addEventListener('scroll', onScroll, {passive:true});
     })();
 
-    // Desktop modal preview for Works (mobile keeps inline playback)
+    // Video playback in cards + desktop modal
+    const isCoarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+
+    function pauseAll(except){
+      document.querySelectorAll('video').forEach(v => {
+        if(v !== except && v.id !== 'vModalVideo'){
+          try{ v.pause(); v.currentTime = 0; }catch(e){}
+          v.closest('.playing')?.classList.remove('playing');
+          if(v.closest('.work')) v.muted = true;
+        }
+      });
+    }
+    function bindCard(card){
+      const v = card.querySelector('video');
+      const btn = card.querySelector('.playbtn');
+      const src = card.getAttribute('data-src');
+      if(!v || !btn || !src) return;
+
+      v.muted = true;
+      v.playsInline = true;
+
+      function playInline(){
+        pauseAll(v);
+        card.classList.add('playing');
+        v.controls = true;
+        v.play().catch(()=>{});
+      }
+
+      btn.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); playInline(); });
+
+      card.addEventListener('click', (e)=>{
+        if(isCoarse){
+          if(v.paused) playInline();
+        } else {
+          if(e.target && e.target.classList && e.target.classList.contains('playbtn')) return;
+          e.preventDefault();
+          openModal(src, card.querySelector('.title')?.textContent || 'Preview');
+        }
+      });
+
+      v.addEventListener('pause', ()=>{ card.classList.remove('playing'); });
+      v.addEventListener('ended', ()=>{ card.classList.remove('playing'); });
+    }
+    document.querySelectorAll('.work[data-src]').forEach(bindCard);
+
+    // Modal logic
     const vModal = document.getElementById('vModal');
     const vModalVideo = document.getElementById('vModalVideo');
     const vModalTitle = document.getElementById('vModalTitle');
@@ -967,19 +946,28 @@
     vModalBackdrop?.addEventListener('click', closeModal);
     window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
 
-    const isCoarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
-    if(!isCoarse){
-      document.querySelectorAll('.work[data-src]').forEach(card => {
-        card.addEventListener('click', (e)=>{
-          if(e.target && e.target.classList && e.target.classList.contains('playbtn')) return;
-          e.preventDefault();
-          const src = card.getAttribute('data-src');
-          const title = card.querySelector('.title')?.textContent || 'Preview';
-          openModal(src, title);
-        });
-      });
+    // Floating CTA hide near contact
+    const floatCta = document.getElementById('floatCta');
+    const contactEl = document.getElementById('contact');
+    function updateFloatCta(){
+      if(!floatCta || !contactEl) return;
+      const r = contactEl.getBoundingClientRect();
+      const nearContact = r.top < window.innerHeight * 0.65;
+      floatCta.style.opacity = nearContact ? '0' : '1';
+      floatCta.style.pointerEvents = nearContact ? 'none' : 'auto';
     }
+    window.addEventListener('scroll', updateFloatCta, {passive:true});
+    window.addEventListener('resize', updateFloatCta);
+    updateFloatCta();
 
-</script>
+    // Cmd/Ctrl+K: jump to Works
+    window.addEventListener('keydown', (e)=>{
+      const isMac = navigator.platform.toLowerCase().includes('mac');
+      if((isMac ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'k'){
+        e.preventDefault();
+        document.getElementById('works')?.scrollIntoView({behavior:'smooth'});
+      }
+    });
+  </script>
 </body>
 </html>
