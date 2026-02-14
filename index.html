@@ -505,7 +505,78 @@
     .contact-card .contact-actions{margin-top:14px}
     .contact-lead{font-weight:900; font-size:16px; max-width:70ch}
 
-  </style>
+  
+    /* EMAIL_SLIDE_REVEAL */
+    /* Email reveal pill (slides out next to Email button) */
+    .email-inline{position:relative; display:inline-flex; align-items:center}
+    .email-reveal{
+      position:absolute;
+      left:calc(100% + 10px);
+      top:50%;
+      transform:translate(-10px, -50%);
+      opacity:0;
+      pointer-events:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(11,13,16,.70);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.45);
+      white-space:nowrap;
+      transition: transform .18s ease, opacity .18s ease;
+    }
+    .email-inline.open .email-reveal{
+      transform:translate(0, -50%);
+      opacity:1;
+      pointer-events:auto;
+    }
+    .email-inline.flip .email-reveal{
+      left:auto;
+      right:calc(100% + 10px);
+    }
+    .email-value{
+      font-weight:900;
+      font-size:12px;
+      letter-spacing:.2px;
+      color:var(--text);
+      user-select:all;
+      cursor:pointer;
+    }
+    .email-copy{
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      border-radius:999px;
+      padding:6px 10px;
+      font-weight:900;
+      font-size:11px;
+      cursor:pointer;
+      transition: background .12s ease, border-color .12s ease, transform .08s ease;
+    }
+    .email-copy:hover{background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.18)}
+    .email-copy:active{transform:translateY(1px)}
+    .email-copied{
+      position:absolute;
+      top:calc(100% + 8px);
+      left:0;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.45);
+      color:var(--text);
+      font-size:11px;
+      font-weight:900;
+      opacity:0;
+      transform:translateY(-6px);
+      pointer-events:none;
+      transition: opacity .16s ease, transform .16s ease;
+    }
+    .email-copied.show{opacity:1; transform:translateY(0)}
+
+</style>
 </head>
 <body class="lang-en">
   <header class="topbar">
@@ -1521,6 +1592,103 @@ document.querySelectorAll('.work video').forEach(v => {
         });
       });
     }
+
+
+
+    // EMAIL_SLIDE_REVEAL
+    (function(){
+      const EMAIL = "alex.altukhov.s@gmail.com";
+      const links = Array.from(document.querySelectorAll('a[href^="mailto:"]'));
+      if(!links.length) return;
+
+      function showCopied(wrap){
+        let t = wrap.querySelector('.email-copied');
+        if(!t){
+          t = document.createElement('span');
+          t.className = 'email-copied';
+          t.textContent = 'Copied';
+          wrap.appendChild(t);
+        }
+        t.classList.add('show');
+        clearTimeout(t._to);
+        t._to = setTimeout(()=> t.classList.remove('show'), 1200);
+      }
+
+      async function copyEmail(wrap){
+        try {
+          await navigator.clipboard.writeText(EMAIL);
+          showCopied(wrap);
+        } catch(e) {
+          window.prompt("Copy email:", EMAIL);
+        }
+      }
+
+      function positionFlip(wrap){
+        const pill = wrap.querySelector('.email-reveal');
+        if(!pill) return;
+        wrap.classList.remove('flip');
+        requestAnimationFrame(()=>{
+          const r = pill.getBoundingClientRect();
+          if(r.right > window.innerWidth - 8) wrap.classList.add('flip');
+        });
+      }
+
+      links.forEach(a => {
+        const wrap = document.createElement('span');
+        wrap.className = 'email-inline';
+        a.parentNode.insertBefore(wrap, a);
+        wrap.appendChild(a);
+
+        const pill = document.createElement('span');
+        pill.className = 'email-reveal';
+        pill.setAttribute('aria-hidden','true');
+
+        const value = document.createElement('span');
+        value.className = 'email-value';
+        value.textContent = EMAIL;
+        value.title = 'Click to copy';
+        value.tabIndex = 0;
+
+        const copyBtn = document.createElement('button');
+        copyBtn.type = 'button';
+        copyBtn.className = 'email-copy';
+        copyBtn.textContent = 'Copy';
+
+        pill.appendChild(value);
+        pill.appendChild(copyBtn);
+        wrap.appendChild(pill);
+
+        function open(){
+          wrap.classList.add('open');
+          pill.setAttribute('aria-hidden','false');
+          positionFlip(wrap);
+        }
+        function close(){
+          wrap.classList.remove('open');
+          wrap.classList.remove('flip');
+          pill.setAttribute('aria-hidden','true');
+        }
+        function toggle(){
+          if(wrap.classList.contains('open')) close(); else open();
+        }
+
+        a.addEventListener('click', (e)=>{ e.preventDefault(); e.stopPropagation(); toggle(); });
+        value.addEventListener('click', (e)=>{ e.stopPropagation(); copyEmail(wrap); });
+        copyBtn.addEventListener('click', (e)=>{ e.stopPropagation(); copyEmail(wrap); });
+        value.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); copyEmail(wrap); }
+          if(e.key === 'Escape') close();
+        });
+
+        window.addEventListener('resize', ()=>{ if(wrap.classList.contains('open')) positionFlip(wrap); });
+      });
+
+      document.addEventListener('click', (e)=>{
+        document.querySelectorAll('.email-inline.open').forEach(w=>{
+          if(!w.contains(e.target)) w.classList.remove('open');
+        });
+      });
+    })();
 
 </script>
 </body>
