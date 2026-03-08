@@ -195,6 +195,13 @@
     .review{border-radius:var(--radius2); border:1px solid var(--line); background:rgba(255,255,255,.03); padding:14px}
     .review .img{border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.02); aspect-ratio: 4/3; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:12px; text-align:center; padding:12px}
 
+    /* Reviews: show screenshots fully (no crop) */
+    #reviews .reviews{grid-template-columns:1fr; gap:18px}
+    #reviews .review{padding:0; background:transparent; border:none}
+    #reviews .review .img{aspect-ratio:auto; display:block; padding:0; overflow:hidden}
+    #reviews .review .img img{width:100% !important; height:auto !important; object-fit:contain !important; border-radius:14px !important}
+
+
     footer{padding:34px 0 50px; border-top:1px solid var(--line); color:var(--muted)}
     [data-lang]{display:none}
     body.lang-en [data-lang="en"], body.lang-ru [data-lang="ru"]{display:block}
